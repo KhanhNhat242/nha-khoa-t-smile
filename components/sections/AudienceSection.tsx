@@ -1,4 +1,11 @@
 import type { ComponentType, SVGProps } from 'react'
+import type { StaticImageData } from 'next/image'
+
+import audience1 from '@/public/images/audience/1.jpg'
+import audience2 from '@/public/images/audience/2.png'
+import audience3 from '@/public/images/audience/3.jpg'
+import audience4 from '@/public/images/audience/4.jpg'
+import audience5 from '@/public/images/audience/5.jpg'
 
 import { bookingHref, sectionIds } from '@/lib/site-config'
 import { getServiceName, type ServiceSlug } from '@/lib/services'
@@ -10,7 +17,6 @@ import WisdomToothIllustration, {
   type WisdomToothKind,
 } from '@/components/ui/WisdomToothIllustration'
 import {
-  ArrowRightIcon,
   CalendarIcon,
   ChildIcon,
   GemIcon,
@@ -20,11 +26,17 @@ import {
 } from '@/components/ui/Icons'
 import { revealDelay } from '@/components/ui/reveal'
 
+import AudienceCarousel, { type AudienceItem } from './AudienceCarousel'
+
 type AudienceGroup = {
   label: string
   description: string
   services: ServiceSlug[]
   Icon: ComponentType<SVGProps<SVGSVGElement>>
+  image: StaticImageData
+  imageAlt: string
+  /** Vị trí cắt ảnh trong thẻ (class object-position) */
+  imagePosition: string
 }
 
 /** 5 nhóm khách hàng mục tiêu (mục 5) và ánh xạ sang dịch vụ [SUY RA]. */
@@ -35,24 +47,37 @@ const groups: AudienceGroup[] = [
       'Cần khám và điều trị các vấn đề răng hàm mặt thông thường như sâu răng, viêm nướu, nhổ răng khôn.',
     services: ['rang-ham-mat'],
     Icon: UsersIcon,
+    image: audience1,
+    imageAlt: "Hình minh họa bác sĩ đang khám răng cho khách",
+    imagePosition: "object-[30%_50%]",
   },
   {
     label: 'Người trẻ 20–35 tuổi',
     description: 'Quan tâm đến ngoại hình, mong muốn có nụ cười đẹp và tự tin hơn.',
     services: ['nha-khoa-tham-my', 'rang-su-cao-cap'],
     Icon: SmileIcon,
+    image: audience2,
+    imageAlt: "Hình minh họa người phụ nữ trẻ cười tươi soi gương",
+    imagePosition: "object-[45%_30%]",
   },
   {
     label: 'Phụ huynh có con 6–12 tuổi',
     description: 'Muốn niềng răng sớm cho con để điều chỉnh hàm từ nhỏ.',
     services: ['nieng-rang-som'],
     Icon: ChildIcon,
+    // TODO(content): ảnh thật bé trai thấy rõ mặt — cần đồng ý của phụ huynh trước khi công khai (Q-17).
+    image: audience3,
+    imageAlt: "Bé trai đang niềng răng cười tươi",
+    imagePosition: "object-[50%_25%]",
   },
   {
     label: 'Trung niên và cao tuổi 45–70 tuổi',
     description: 'Bị mất răng, cần phục hồi bằng cấy ghép Implant để ăn nhai tốt hơn.',
     services: ['cay-ghep-implant'],
     Icon: HeartIcon,
+    image: audience4,
+    imageAlt: "Bác sĩ đang thực hiện cấy ghép Implant cho khách",
+    imagePosition: "object-[60%_15%]",
   },
   {
     // TODO(content): nhãn viết lại từ "Khách có thu nhập khá" [ĐỀ XUẤT] — chờ khách xác nhận (mục 13).
@@ -60,6 +85,9 @@ const groups: AudienceGroup[] = [
     description: 'Sẵn sàng đầu tư cho răng sứ cao cấp và cấy ghép Implant chỉn chu.',
     services: ['rang-su-cao-cap', 'cay-ghep-implant'],
     Icon: GemIcon,
+    image: audience5,
+    imageAlt: "Phòng điều trị với ghế nha khoa và màn hình xem phim X-quang",
+    imagePosition: "object-[50%_40%]",
   },
 ]
 
@@ -72,115 +100,42 @@ const wisdomToothKinds: { kind: WisdomToothKind; name: string; description: stri
   { kind: 'upright', name: 'Mọc thẳng', description: 'Mọc thẳng hàng, ngay ngắn như các răng khác.' },
 ]
 
-/** Section "Phù hợp với ai" (#khach-hang) — nền trắng. */
+/** Section "Phù hợp với ai" (#khach-hang), GD-11: carousel lõm 5 nhóm khách ở trên, khối nhận biết răng khôn ở dưới. */
 export default function AudienceSection() {
+  const items: AudienceItem[] = groups.map(({ label, description, services, Icon, image, imageAlt, imagePosition }) => ({
+    label,
+    description,
+    image,
+    imageAlt,
+    imagePosition,
+    icon: <Icon className="size-6" />,
+    services: services.map((slug) => ({ slug, name: getServiceName(slug) })),
+  }))
+
   return (
-    <section
-      id={sectionIds.audience}
-      aria-labelledby="audience-title"
-      className="relative bg-surface py-14 lg:py-24"
-    >
-      <Container>
-        <div data-reveal>
-          {/* TODO(content): tiêu đề và câu mở đầu [ĐỀ XUẤT] — chờ khách xác nhận (mục 13). */}
-          <SectionHeading
-            eyebrow="Phù hợp với ai"
-            titleId="audience-title"
-            title={
-              <>
-                <BrandName /> đồng hành cùng ai?
-              </>
-            }
-            description="Mỗi độ tuổi có một nhu cầu riêng. Quý khách chọn nhóm phù hợp để đặt lịch đúng dịch vụ cần tư vấn."
-            className="mb-8 lg:mb-14"
-          />
-        </div>
-
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
-          <ul className="space-y-4 lg:col-span-7 lg:space-y-5">
-            {groups.map(({ label, description, services, Icon }, index) => (
-              <li key={label} data-reveal style={revealDelay(index * 70)}>
-                {/* Mobile: icon + tiêu đề cùng hàng, mô tả và nút trải hết chiều ngang. Từ sm: nội dung thụt theo icon. */}
-                <article className="grid grid-cols-[auto_1fr] items-center gap-x-4 rounded-2xl border border-brand-green-100 bg-surface p-5 transition duration-300 hover:border-brand-green/40 hover:shadow-soft sm:gap-x-5 lg:p-6">
-                  <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-brand-green-light text-brand-green ring-1 ring-brand-green-100 sm:row-span-3 sm:size-14 sm:self-start">
-                    <Icon className="size-6 sm:size-7" />
-                  </span>
-                  <h3 className="text-lg leading-snug font-bold text-ink">{label}</h3>
-                  <p className="col-span-2 mt-3 text-base leading-relaxed text-ink-muted sm:col-span-1 sm:col-start-2 sm:mt-1">
-                    {description}
-                  </p>
-                  <ul className="col-span-2 mt-3 flex flex-wrap gap-2 sm:col-span-1 sm:col-start-2">
-                    {services.map((slug) => (
-                      <li key={slug}>
-                        <a
-                          href={bookingHref}
-                          data-book-service={slug}
-                          className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-brand-green-100 px-4 text-[0.9375rem] font-semibold whitespace-nowrap text-brand-green-dark transition hover:bg-brand-green-strong hover:text-surface"
-                        >
-                          <span className="sr-only">Đặt lịch tư vấn </span>
-                          {getServiceName(slug)}
-                          <ArrowRightIcon className="size-4" />
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              </li>
-            ))}
-          </ul>
-
-          <div className="lg:col-span-5">
-            <aside
-              aria-labelledby="wisdom-tooth-title"
-              data-reveal
-              className="relative overflow-hidden rounded-2xl bg-brand-green-light p-6 ring-1 ring-brand-green-100 sm:p-8 lg:sticky lg:top-28"
-            >
-              <div className="relative">
-                <p className="inline-flex rounded-full bg-brand-yellow px-3.5 py-1.5 text-sm font-bold text-ink">
-                  Góc nhận biết nhanh
-                </p>
-                <h3
-                  id="wisdom-tooth-title"
-                  className="mt-4 text-2xl leading-snug font-extrabold text-ink"
-                >
-                  Răng khôn của Quý khách thuộc kiểu nào?
-                </h3>
-
-                <ul className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-1">
-                  {wisdomToothKinds.map((item) => (
-                    <li
-                      key={item.kind}
-                      className="flex items-center gap-4 rounded-2xl bg-surface p-3.5 pr-4 shadow-soft"
-                    >
-                      <span className="block h-[3.75rem] w-20 shrink-0 overflow-hidden rounded-xl bg-surface ring-1 ring-brand-green-100">
-                        <WisdomToothIllustration kind={item.kind} />
-                      </span>
-                      <span>
-                        <span className="block font-bold text-ink">{item.name}</span>
-                        <span className="mt-1 block text-[0.9375rem] leading-snug text-ink-muted">
-                          {item.description}
-                        </span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <p className="mt-6 text-base leading-relaxed text-ink-muted">
-                  Để biết chính xác tình trạng răng khôn, Quý khách nên được bác sĩ thăm khám và chụp phim.
-                </p>
-                <ButtonLink
-                  href={bookingHref}
-                  data-book-service="rang-ham-mat"
-                  className="mt-5 w-full sm:w-auto"
-                >
-                  <CalendarIcon className="size-5" />
-                  Đặt lịch tư vấn
-                </ButtonLink>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </Container>
+    <section id={sectionIds.audience} aria-labelledby="audience-title" className="overflow-x-clip bg-surface pt-6 pb-16 lg:pt-8 lg:pb-28">
+      {/* Phần trên: carousel lõm, tràn hết chiều ngang; tiêu đề nằm trong vùng dính cùng carousel */}
+      <div data-reveal>
+        <AudienceCarousel
+          items={items}
+          header={
+            <Container className="relative z-10 mb-3 sm:mb-6 lg:mb-8">
+              {/* TODO(content): tiêu đề và câu mở đầu [ĐỀ XUẤT] — chờ khách xác nhận (mục 13). */}
+              <SectionHeading
+                layout="stack"
+                align="center"
+                titleId="audience-title"
+                title={
+                  <>
+                    <BrandName /> đồng hành cùng ai?
+                  </>
+                }
+                description=""
+              />
+            </Container>
+          }
+        />
+      </div>
     </section>
   )
 }

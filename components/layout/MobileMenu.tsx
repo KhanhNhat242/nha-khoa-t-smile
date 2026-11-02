@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, type MouseEvent } from 'react'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import { Drawer } from 'antd'
 
 import { bookingHref, navItems, siteConfig } from '@/lib/site-config'
@@ -11,11 +11,27 @@ import MenuButton from './MenuButton'
 
 /**
  * Menu trên mobile/tablet (dưới 1024px) dùng antd Drawer.
- * Khi bấm một mục: đóng Drawer trước (antd đang khóa cuộn trang), xong mới cuộn tới section.
+ * Drawer rộng toàn màn hình; khi mở thì khóa cuộn trang (mục 10).
+ * Khi bấm một mục: đóng Drawer trước (đang khóa cuộn trang), xong mới cuộn tới section.
  */
 export default function MobileMenu() {
   const [open, setOpen] = useState(false)
   const pendingHash = useRef<string | null>(null)
+
+  // Khóa cuộn trang khi menu mở. antd chỉ đặt overflow: hidden trên <body>, nhưng <html> có
+  // overflow-x: clip (globals.css) nên thiết lập của body không áp lên khung cuộn của trang;
+  // vì vậy khóa thẳng trên <html>.
+  useEffect(() => {
+    if (!open) return
+    const root = document.documentElement
+    const previous = { overflow: root.style.overflow, overscroll: root.style.overscrollBehavior }
+    root.style.overflow = 'hidden'
+    root.style.overscrollBehavior = 'none'
+    return () => {
+      root.style.overflow = previous.overflow
+      root.style.overscrollBehavior = previous.overscroll
+    }
+  }, [open])
 
   function handleNavigate(event: MouseEvent<HTMLAnchorElement>, hash: string) {
     event.preventDefault()
@@ -44,7 +60,7 @@ export default function MobileMenu() {
         onClose={() => setOpen(false)}
         afterOpenChange={handleAfterOpenChange}
         placement="right"
-        size={320}
+        size="100%"
         title={<span className="text-lg font-bold text-brand-green-dark">{siteConfig.name}</span>}
         closeIcon={
           <span className="grid size-11 place-items-center rounded-xl text-ink" aria-label="Đóng menu">

@@ -1,135 +1,97 @@
 import Image from 'next/image'
 
-import clinicRoom from '@/public/images/clinic/phong-dieu-tri.jpg'
-import porcelainModel from '@/public/images/clinic/mau-ham-rang-su.jpg'
+import heroBanner from '@/public/images/hero-banner.jpg'
 import { bookingHref, sectionIds, siteConfig } from '@/lib/site-config'
-import ButtonLink from '@/components/ui/ButtonLink'
 import Container from '@/components/ui/Container'
-import { Swoosh } from '@/components/ui/Decor'
 import {
-  CalendarIcon,
-  CheckCircleIcon,
-  MapPinIcon,
+  ArrowRightIcon,
+  CheckIcon,
+  ClipboardIcon,
   PhoneIcon,
-  ToothIcon,
+  ScanIcon,
+  StethoscopeIcon,
 } from '@/components/ui/Icons'
+
+import { revealDelay } from '@/components/ui/reveal'
+
+import HeroHeadline from './HeroHeadline'
 
 /** Trust & Authority: 3 điểm tin cậy, lấy nguyên ý từ USP 1 và 3 (mục 6) [SUY RA]. */
 const trustPoints = [
-  'Bác sĩ Răng Hàm Mặt trực tiếp thăm khám',
-  'Chụp phim, đánh giá xương trước khi làm',
-  'Phương án riêng cho từng người',
+  { text: 'Bác sĩ Răng Hàm Mặt trực tiếp thăm khám', Icon: StethoscopeIcon },
+  { text: 'Chụp phim, đánh giá xương trước khi làm', Icon: ScanIcon },
+  { text: 'Phương án riêng cho từng người', Icon: ClipboardIcon },
 ]
 
 /**
- * Hero (#trang-chu) — ND-08, GD-08. Cao vừa một màn hình trên desktop.
- * Flat: nền phẳng, khối màu đặc phía sau ảnh. Không dùng data-reveal ở tiêu đề và ảnh chính (LCP).
+ * Hero (#trang-chu) — ND-08, GD-12. Ảnh phòng điều trị phủ kín section, cao đúng một màn hình
+ * (trừ thanh thông tin và header). Chữ trắng góc dưới trái trên lớp phủ xanh đậm;
+ * thẻ nổi 3 điểm tin cậy góc dưới phải (từ md).
+ * data-reveal (GD-15) chỉ cho đoạn mô tả và nút; không dùng ở tiêu đề và ảnh nền (LCP).
  */
 export default function HeroSection() {
+  const [mainPoint, ...otherPoints] = trustPoints
+
   return (
     <section
       id={sectionIds.hero}
       aria-labelledby="hero-title"
-      className="relative overflow-hidden bg-brand-green-light"
+      className="relative isolate flex min-h-[max(34rem,calc(100svh-4rem-4px))] overflow-hidden bg-brand-green-dark md:min-h-[max(34rem,calc(100svh-6.5rem-4px))] lg:min-h-[max(36rem,calc(100svh-7.5rem-4px))]"
     >
-      <Container className="grid items-center gap-10 pt-8 pb-14 sm:pt-12 lg:min-h-[max(36rem,calc(100svh-7.75rem))] lg:grid-cols-[55fr_45fr] lg:gap-12 lg:py-8">
-        {/* Cột chữ */}
-        <div className="max-w-2xl">
-          <p className="inline-flex animate-enter items-center gap-2 rounded-2xl bg-brand-yellow px-4 py-2 sm:rounded-full text-sm font-bold text-ink sm:text-base">
-            <ToothIcon className="size-[1.15rem]" />
-            Nha khoa tại {siteConfig.address.area}
-          </p>
+      <Image
+        src={heroBanner}
+        alt={`Phòng điều trị của ${siteConfig.name} với ghế nha khoa và màn hình xem phim X-quang`}
+        fill
+        loading="eager"
+        fetchPriority="high"
+        placeholder="blur"
+        sizes="100vw"
+        className="-z-20 object-cover object-[68%_50%] md:object-[60%_45%]"
+      />
+      {/* Lớp phủ: xanh đậm từ mép trái nhạt dần sang phải, và đậm ở đáy — nền sau chữ trắng luôn đủ tương phản */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 hidden bg-linear-to-r from-brand-green-strong from-0% via-brand-green-dark/60 via-30% to-transparent to-55% md:block"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-linear-to-t from-brand-green-dark from-25% via-brand-green-dark/75 via-50% to-transparent to-80% md:from-brand-green-dark/90 md:from-0% md:via-brand-green-dark/40 md:via-35% md:to-60%"
+      />
 
-          <h1
+      <Container className="flex w-full items-end justify-between gap-10 pt-16 pb-28 md:pb-12 lg:pb-16">
+        <div className="max-w-2xl text-surface">
+          <HeroHeadline
             id="hero-title"
-            className="mt-5 text-balance text-[2.125rem] font-extrabold leading-[1.15] tracking-tight text-ink sm:mt-6 sm:text-5xl lg:mt-5 lg:text-[2.75rem] xl:text-[3.25rem]"
-          >
-            <span className="relative inline-block">
-              {siteConfig.name}
-              <Swoosh className="absolute -bottom-2 left-0 h-3 w-full text-brand-yellow sm:-bottom-2.5" />
-            </span>
-            <span className="sr-only"> – </span>
-            {/* Dùng brand-green-strong (không dùng brand-green) để chữ đạt 4,5:1 */}
-            <span className="mt-3 block text-brand-green-strong sm:mt-4">
-              {siteConfig.headline.split(/(, | & )/).map((part, index) =>
-                part === ', ' || part === ' & ' ? (
-                  part
-                ) : (
-                  <span key={`${part}-${index}`} className="whitespace-nowrap">
-                    {part}
-                  </span>
-                ),
-              )}
-            </span>
-          </h1>
+            name={siteConfig.name}
+            headline={siteConfig.headline}
+            className="text-[2.25rem] leading-[1.08] font-bold tracking-[-0.025em] select-none sm:text-[3rem] xl:text-[3.75rem]"
+          />
 
-          <p className="mt-6 max-w-xl animate-enter text-pretty text-lg lg:mt-5 leading-relaxed text-ink-muted [animation-delay:80ms] sm:text-xl">
+          <p data-reveal="up" style={revealDelay(80)} className="mt-5 max-w-xl text-lg leading-relaxed text-pretty text-surface/90 sm:text-xl">
             {siteConfig.slogan}
           </p>
 
-          <div className="mt-8 flex animate-enter flex-col gap-3 lg:mt-7 [animation-delay:160ms] sm:flex-row sm:flex-wrap">
-            <ButtonLink href={bookingHref} size="lg">
-              <CalendarIcon className="size-5" />
+          <div data-reveal="up" style={revealDelay(200)} className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-7">
+            <a
+              href={bookingHref}
+              className="group inline-flex min-h-14 items-center justify-center gap-2.5 self-start rounded-full bg-surface px-7 text-[1.0625rem] font-bold text-brand-green-dark shadow-soft transition-[background-color,scale] duration-200 hover:bg-brand-green-light active:scale-[0.97] active:duration-75"
+            >
               Đặt lịch tư vấn
-            </ButtonLink>
-            <ButtonLink href={siteConfig.phone.href} variant="outline" size="lg">
-              <PhoneIcon className="size-5" />
-              Gọi {siteConfig.phone.display}
-            </ButtonLink>
+              <ArrowRightIcon className="size-5 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href={siteConfig.phone.href}
+              className="group inline-flex min-h-12 items-center gap-3 self-start rounded-full text-surface"
+            >
+              <span className="grid size-12 place-items-center rounded-full border border-surface/40 transition-colors duration-200 group-hover:bg-surface group-hover:text-brand-green-dark">
+                <PhoneIcon className="size-5" />
+              </span>
+              <span className="leading-tight">
+                <span className="block text-sm text-surface/80">Gọi hotline</span>
+                <span className="block text-lg font-bold tracking-wide">{siteConfig.phone.display}</span>
+              </span>
+            </a>
           </div>
-
-          {/* Dòng tin cậy */}
-          <ul className="mt-8 grid animate-enter gap-3 border-t border-brand-green-100 pt-6 lg:mt-7 lg:pt-5 [animation-delay:240ms] sm:grid-cols-3 sm:gap-4">
-            {trustPoints.map((point) => (
-              <li key={point} className="flex items-start gap-2.5 text-base font-semibold leading-snug text-ink">
-                <CheckCircleIcon className="mt-0.5 size-5 shrink-0 text-brand-green-strong" />
-                {point}
-              </li>
-            ))}
-          </ul>
-
-          {/* Desktop đã có địa chỉ ở thanh thông tin trên cùng */}
-          <p className="mt-5 flex items-start gap-2.5 text-base text-ink-muted md:hidden">
-            <MapPinIcon className="mt-0.5 size-5 shrink-0 text-brand-green-strong" />
-            <span>{siteConfig.address.full}</span>
-          </p>
-        </div>
-
-        {/* Cụm ảnh: ảnh phòng điều trị + khối màu phẳng + thẻ ảnh nổi */}
-        <div className="relative mx-auto w-full max-w-lg lg:mx-0 lg:ml-auto lg:h-[min(36rem,calc(100svh-12rem))] lg:max-w-none">
-          <div
-            aria-hidden="true"
-            className="absolute top-8 -right-1 bottom-10 left-[24%] rounded-2xl bg-brand-green sm:-right-3 lg:top-10 lg:bottom-8"
-          />
-
-          <div className="relative ml-auto aspect-[4/3] w-[92%] overflow-hidden rounded-2xl shadow-float ring-4 ring-surface sm:aspect-[5/4] lg:aspect-auto lg:h-full lg:w-[82%]">
-            <Image
-              src={clinicRoom}
-              alt={`Phòng điều trị của ${siteConfig.name} với ghế nha khoa và màn hình xem phim X-quang`}
-              fill
-              loading="eager"
-              fetchPriority="high"
-              placeholder="blur"
-              sizes="(min-width: 1280px) 440px, (min-width: 1024px) 36vw, (min-width: 640px) 470px, 92vw"
-              className="object-cover object-[50%_42%]"
-            />
-          </div>
-
-          <figure className="absolute -bottom-6 left-0 w-32 animate-float rounded-2xl bg-surface p-2 shadow-float sm:w-40 lg:bottom-4 lg:-left-6 lg:w-48">
-            <div className="relative aspect-square overflow-hidden rounded-xl">
-              <Image
-                src={porcelainModel}
-                alt="Mẫu hàm răng sứ thẩm mỹ đặt trên bàn đá"
-                fill
-                placeholder="blur"
-                sizes="(min-width: 1024px) 192px, 160px"
-                className="object-cover"
-              />
-            </div>
-            <figcaption className="px-1 pt-2 pb-0.5 text-sm font-bold text-brand-green-dark">
-              Răng sứ thẩm mỹ
-            </figcaption>
-          </figure>
         </div>
       </Container>
     </section>

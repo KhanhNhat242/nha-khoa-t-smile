@@ -1,62 +1,65 @@
 import type { ReactNode } from 'react'
 
 type SectionHeadingProps = {
-  eyebrow: string
   title: ReactNode
   description?: ReactNode
   /** id cho thẻ h2, dùng với aria-labelledby của section */
   titleId?: string
-  align?: 'center' | 'left'
+  /**
+   * split: tiêu đề bên trái, đoạn mở đầu canh đáy bên phải (desktop) — bố cục chính của trang.
+   * stack: tiêu đề và đoạn mở đầu xếp chồng, canh trái.
+   */
+  layout?: 'split' | 'stack'
+  /** Chỉ áp dụng cho layout "stack": canh trái (mặc định) hoặc canh giữa. */
+  align?: 'left' | 'center'
   tone?: 'light' | 'dark'
   className?: string
 }
 
-/**
- * Cụm tiêu đề section: nhãn nhỏ + H2 + đoạn mở đầu (rộng tối đa 672px).
- * Nhãn là huy hiệu nền vàng chữ tối (6,83:1) — không đặt chữ vàng trên nền trắng hay nền xanh đậm.
- */
+/** Cụm tiêu đề section. Canh trái theo lưới 12 cột, không dùng nhãn nhỏ phía trên. */
 export default function SectionHeading({
-  eyebrow,
   title,
   description,
   titleId,
-  align = 'center',
+  layout = 'split',
+  align = 'left',
   tone = 'light',
   className = '',
 }: SectionHeadingProps) {
   const isDark = tone === 'dark'
-  return (
-    <div
-      className={`${align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'} ${className}`}
+  const titleNode = (
+    <h2
+      id={titleId}
+      className={`text-balance text-[1.875rem] leading-[1.12] font-bold tracking-[-0.02em] sm:text-4xl lg:text-[2.875rem] ${
+        isDark ? 'text-surface' : 'text-ink'
+      }`}
     >
-      <p
-        className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-bold ${
-          isDark ? 'bg-brand-yellow text-ink' : 'bg-brand-green-100 text-brand-green-dark'
-        }`}
-      >
-        <span
-          aria-hidden="true"
-          className={`size-2 rounded-full ${isDark ? 'bg-ink' : 'bg-brand-green'}`}
-        />
-        {eyebrow}
-      </p>
-      <h2
-        id={titleId}
-        className={`mt-4 text-balance text-[1.75rem] font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-[2.625rem] ${
-          isDark ? 'text-surface' : 'text-ink'
-        }`}
-      >
-        {title}
-      </h2>
-      {description ? (
-        <p
-          className={`mt-4 text-pretty text-base leading-relaxed sm:text-lg ${
-            isDark ? 'text-surface/90' : 'text-ink-muted'
-          }`}
-        >
-          {description}
-        </p>
-      ) : null}
+      {title}
+    </h2>
+  )
+  const descriptionNode = description ? (
+    <p
+      className={`text-pretty text-base leading-relaxed sm:text-lg ${
+        isDark ? 'text-surface/90' : 'text-ink-muted'
+      }`}
+    >
+      {description}
+    </p>
+  ) : null
+
+  if (layout === 'stack') {
+    return (
+      <div className={`${align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-xl'} ${className}`}>
+        {titleNode}
+        {descriptionNode ? <div className="mt-4">{descriptionNode}</div> : null}
+      </div>
+    )
+  }
+
+  return (
+    <div className={`grid gap-4 lg:grid-cols-12 lg:items-end lg:gap-8 ${className}`}>
+      <div className="lg:col-span-7">{titleNode}</div>
+      {descriptionNode ? <div className="lg:col-span-4 lg:col-start-9">{descriptionNode}</div> : null}
     </div>
   )
 }

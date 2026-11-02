@@ -1,82 +1,83 @@
-import type { ComponentType, SVGProps } from 'react'
+import Image from 'next/image'
 
-import { sectionIds, siteConfig } from '@/lib/site-config'
+import aboutUs from '@/public/images/about-us.jpg'
+import { bookingHref, sectionIds, siteConfig } from '@/lib/site-config'
 import BrandName from '@/components/ui/BrandName'
 import Container from '@/components/ui/Container'
 import SectionHeading from '@/components/ui/SectionHeading'
-import { ScanIcon, SparklesIcon, StethoscopeIcon } from '@/components/ui/Icons'
+import ButtonLink from '@/components/ui/ButtonLink'
+import { CalendarIcon, CheckIcon } from '@/components/ui/Icons'
 import { revealDelay } from '@/components/ui/reveal'
 
-type Usp = {
-  title: string
-  description: string
-  Icon: ComponentType<SVGProps<SVGSVGElement>>
-}
-
-/** Đúng 3 USP của phiếu (mục 6, ND-06). Không thêm USP khác. */
-const usps: Usp[] = [
-  {
-    title: 'Bác sĩ trực tiếp thăm khám',
-    description:
-      'Bác sĩ Răng Hàm Mặt trực tiếp thăm khám, tư vấn và giải thích rõ từng bước cho Quý khách.',
-    Icon: StethoscopeIcon,
-  },
-  {
-    title: 'Dịch vụ đa dạng',
-    description:
-      'Đáp ứng đa dạng nhu cầu từ răng sứ thẩm mỹ, cấy ghép Implant đến niềng răng sớm cho trẻ.',
-    Icon: SparklesIcon,
-  },
-  {
-    title: 'Tư vấn kỹ trước khi làm',
-    description:
-      'Kiểm tra khớp cắn, chụp phim, đánh giá xương và đưa phương án riêng phù hợp cho từng người.',
-    Icon: ScanIcon,
-  },
+/**
+ * 4 lý do — nguyên văn nội dung "Lý do khách hàng chọn T-Smile" người dùng cung cấp 02/11/2026 (mục 6, ND-06).
+ * TODO(content): ý 2–4 không có trong phiếu — chờ khách xác nhận (Q-19, mục 13).
+ */
+const reasons = [
+  'Bác sĩ trực tiếp thăm khám, theo dõi và giải thích rõ ràng',
+  'Phòng khám sạch – vô khuẩn – trang thiết bị đầy đủ',
+  'Chi phí minh bạch, quy trình rõ ràng',
+  'Chăm sóc sau điều trị chu đáo',
 ]
 
-/** Section "Vì sao chọn Nha khoa T-Smile" (#gioi-thieu) — phần chứng minh uy tín, nền trắng. */
+/**
+ * Section "Lý do Quý khách chọn Nha khoa T-Smile" (#gioi-thieu), GD-13.
+ * Trái: tiêu đề, câu mở đầu, lưới 2×2 (4 lý do, dấu kiểm, vạch vàng), nút đặt lịch + hotline.
+ * Phải: ảnh about-us bo góc. Không dùng con số thống kê như mẫu tham khảo (Q-07).
+ */
 export default function WhyUsSection() {
   return (
-    <section
-      id={sectionIds.about}
-      aria-labelledby="why-us-title"
-      className="relative bg-surface py-14 lg:py-24"
-    >
-      <Container>
-        <div data-reveal>
-          <SectionHeading
-            eyebrow="Giới thiệu"
-            titleId="why-us-title"
-            title={
-              <>
-                Vì sao Quý khách chọn <BrandName />?
-              </>
-            }
-            // TODO(content): câu mở đầu [ĐỀ XUẤT, SUY RA từ USP 1 và 3] — chờ khách xác nhận (mục 13).
-            description={`${siteConfig.name} chú trọng thăm khám kỹ và tư vấn rõ ràng trước khi đưa ra phương án điều trị cho Quý khách.`}
-            className="mb-8 lg:mb-14"
-          />
+    <section id={sectionIds.about} aria-labelledby="why-us-title" className="bg-surface py-16 lg:py-24">
+      <Container className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
+        <div className="lg:col-span-6">
+          <div data-reveal="left">
+            <SectionHeading
+              layout="stack"
+              titleId="why-us-title"
+              title={
+                <>
+                  Lý do Quý khách chọn <BrandName />
+                </>
+              }
+              // TODO(content): câu mở đầu [ĐỀ XUẤT, SUY RA từ USP 1 và 3] — chờ khách xác nhận (mục 13).
+              description={`${siteConfig.name} chú trọng thăm khám kỹ và tư vấn rõ ràng trước khi đưa ra phương án điều trị cho Quý khách.`}
+            />
+          </div>
+
+          <ul className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:mt-12">
+            {reasons.map((reason, index) => (
+              <li
+                key={reason}
+                data-reveal="up"
+                style={revealDelay(150 + index * 120)}
+                className="flex gap-4 border-t-2 border-brand-yellow pt-5"
+              >
+                <span
+                  aria-hidden="true"
+                  className="grid size-9 shrink-0 place-items-center rounded-full bg-brand-green-light text-brand-green-strong"
+                >
+                  <CheckIcon className="size-5" />
+                </span>
+                <p className="text-lg leading-snug font-bold tracking-[-0.01em] text-pretty text-ink">{reason}</p>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <ul className="grid gap-5 md:grid-cols-3 lg:gap-8">
-          {usps.map(({ title, description, Icon }, index) => (
-            <li key={title} data-reveal style={revealDelay(index * 80)}>
-              <article className="group h-full rounded-2xl border border-brand-green-100 bg-surface p-6 shadow-soft transition-[box-shadow,border-color,translate] duration-200 hover:-translate-y-1 hover:border-brand-green/40 hover:shadow-soft-lg lg:p-8">
-                <div className="flex items-center justify-between">
-                  <span className="grid size-14 place-items-center rounded-xl bg-brand-green-strong text-surface">
-                    <Icon className="size-7" />
-                  </span>
-                  <span className="rounded-full bg-brand-yellow-light px-3 py-1 text-sm font-bold text-ink">
-                    0{index + 1}
-                  </span>
-                </div>
-                <h3 className="mt-6 text-xl font-bold text-ink">{title}</h3>
-                <p className="mt-3 text-base leading-relaxed text-ink-muted">{description}</p>
-              </article>
-            </li>
-          ))}
-        </ul>
+        {/* Ảnh: khung ngang 6:5, chỉ hiện phần giữa ảnh — cắt bỏ chữ in sẵn ở trên và watermark ở góc dưới (GD-13, Q-18) */}
+        {/* TODO(content): ảnh about-us có chữ "TSMILE" sai tên và nghi ảnh AI — chờ khách xác nhận hoặc gửi ảnh thật (Q-18). */}
+        <div data-reveal="right" style={revealDelay(100)} className="lg:col-span-5 lg:col-start-8">
+          <div className="relative mx-auto aspect-[6/5] max-w-[30rem] overflow-hidden rounded-2xl shadow-soft-lg">
+            <Image
+              src={aboutUs}
+              alt="Hình minh họa mẫu hàm răng sứ đặt trên bàn đá"
+              fill
+              placeholder="blur"
+              sizes="(min-width: 1024px) 480px, 100vw"
+              className="reveal-zoom object-cover object-[50%_76%]"
+            />
+          </div>
+        </div>
       </Container>
     </section>
   )

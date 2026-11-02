@@ -11,7 +11,7 @@ import RevealObserver from '@/components/ui/RevealObserver'
 /** Trang chủ dạng landing (CN-01): chỉ ghép các section theo thứ tự mục 10. */
 export default function HomePage() {
   return (
-    <main id="noi-dung-chinh">
+    <main id="noi-dung-chinh" className="overflow-x-clip">
       <DentistJsonLd />
       <HeroSection />
       <WhyUsSection />

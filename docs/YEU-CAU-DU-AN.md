@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Nguồn** | Phiếu Dev 50 – NHA KHOA T-Smile Ninh Bình (sale ghi, ngày giao hồ sơ 30/10/2026) |
-| **Phiên bản** | 1.2, cập nhật ngày 02/11/2026 (tạo bản 1.0 cùng ngày) |
+| **Phiên bản** | 1.15, cập nhật ngày 02/11/2026 (tạo bản 1.0 cùng ngày) |
 | **Vai trò** | Đây là **nguồn thông tin gốc (source of truth)** cho mọi việc trong repo. Code, nội dung và giao diện phải khớp với tài liệu này. Có thông tin mới thì cập nhật tài liệu này trước (xem mục 15), rồi mới sửa code. |
 
 ## Cách đọc nhãn
@@ -146,7 +146,13 @@ Nguyên văn:
 2. Dịch vụ đa dạng: răng sứ thẩm mỹ, cấy ghép Implant, niềng răng sớm cho trẻ
 3. Tư vấn kỹ trước khi làm: kiểm tra khớp cắn, chụp phim, đánh giá xương, đưa phương án riêng cho từng người
 
-- **ND-06:** Section "Vì sao chọn Nha khoa T-Smile" dùng đúng 3 USP này. Không thêm USP khác như "trang thiết bị hiện đại nhập khẩu", "bảo hành trọn đời", "không đau"... nếu khách chưa cung cấp.
+**Cập nhật 02/11/2026 — người dùng cung cấp nội dung "Lý do khách hàng chọn T-Smile"** (nguyên văn, 4 ý):
+1. Bác sĩ trực tiếp thăm khám, theo dõi và giải thích rõ ràng
+2. Phòng khám sạch – vô khuẩn – trang thiết bị đầy đủ
+3. Chi phí minh bạch, quy trình rõ ràng
+4. Chăm sóc sau điều trị chu đáo
+
+- **ND-06:** *(cập nhật 02/11/2026: section "Vì sao chọn" nay dùng đúng 4 ý ở trên, nguyên văn, theo chỉ đạo của người dùng; 3 USP của phiếu vẫn dùng cho Hero và Quy trình. Ý 2–4 chờ khách xác nhận, Q-19)* Bản cũ: Section "Vì sao chọn Nha khoa T-Smile" dùng đúng 3 USP này. Không thêm USP khác như "trang thiết bị hiện đại nhập khẩu", "bảo hành trọn đời", "không đau"... nếu khách chưa cung cấp.
 - **ND-07:** Section "Quy trình thăm khám & tư vấn" [SUY RA từ USP 1 và 3]:
   1. Bác sĩ Răng Hàm Mặt trực tiếp thăm khám
   2. Kiểm tra khớp cắn, chụp phim, đánh giá xương
@@ -206,10 +212,37 @@ Bảng màu **cập nhật 02/11/2026 theo chỉ đạo của người dùng** (
 Ba lớp: **Soft UI Evolution** cho hình ảnh tổng thể, **Trust & Authority** cho bố cục, **Accessible & Ethical** làm nền tiêu chuẩn; kết hợp **Flat Design**.
 - Flat + Soft UI: màu phẳng, không gradient, không họa tiết chấm/lá, không làm mờ (blur). Bóng đổ mềm nhiều lớp rất nhẹ. Bo góc: thẻ 16px, nút/ô nhập 12px. Chuyển động 200–300ms, phản hồi bấm 80ms.
 - Trust & Authority: hero nêu rõ uy tín (dòng 3 điểm tin cậy lấy từ USP), thanh thông tin trên cùng (địa chỉ, hotline, Facebook), rồi tới phần chứng minh (USP), giải pháp (dịch vụ, quy trình) và lời kêu gọi rõ ràng. **Không** dùng logo đối tác, chứng nhận, con số thống kê vì phiếu không có (Q-07).
+- Ngắt dòng (người dùng yêu cầu 02/11/2026): không để một chữ đứng một mình ở dòng cuối. Tiêu đề dùng `text-wrap: balance` (các dòng dài gần bằng nhau), đoạn văn và mục danh sách dùng `text-wrap: pretty`; khai báo chung trong `globals.css` cho cả trang.
 - Accessible & Ethical: chữ ≥ 16px, tương phản ≥ 4,5:1 (mục tiêu 7:1 cho chữ chính), vòng focus 3px, vùng chạm ≥ 44px, tôn trọng `prefers-reduced-motion`.
-- Bento Box Grid cho 5 dịch vụ: 3 thẻ gọn ở hàng trên, 2 thẻ lớn nền xanh đậm cho **Cấy ghép Implant** và **Răng sứ cao cấp** ở hàng dưới. Giữ đúng thứ tự 1→5.
+- *(Đã thay bằng GD-10)* Bento Box Grid cho 5 dịch vụ: 3 thẻ gọn ở hàng trên, 2 thẻ lớn nền xanh đậm cho **Cấy ghép Implant** và **Răng sứ cao cấp** ở hàng dưới. Giữ đúng thứ tự 1→5.
 - Micro-interactions cho form: hiệu ứng nhấn nút, dấu kiểm xanh `#22C55E` khi ô hợp lệ, trạng thái đang gửi, thành công (dấu kiểm hiện dần), lỗi (khung rung nhẹ).
 - Form theo hướng chuyển đổi: một nút CTA chính duy nhất, ô nhập cao 48px. Mẫu "Conversion-Optimized" đã được thay bằng "funnel-3-step-conversion" trong bộ dữ liệu thiết kế; mẫu này là thứ tự section (vấn đề → giải pháp → hành động), trang hiện tại đã theo thứ tự đó (Phù hợp với ai → Dịch vụ, Quy trình → Đặt lịch), nên form vẫn giữ **một bước** để ít bước nhất cho khách.
+
+### GD-09: Bố cục "tài liệu phòng khám" (người dùng yêu cầu bỏ cảm giác rẻ tiền / giống AI, 02/11/2026) [ĐỀ XUẤT, người dùng duyệt]
+
+- Bỏ khuôn lặp "tiêu đề căn giữa + lưới thẻ icon bằng nhau". Tiêu đề section canh trái trên lưới 12 cột: tiêu đề bên trái, đoạn mở đầu canh đáy bên phải. Không dùng nhãn nhỏ phía trên tiêu đề (người dùng tự bỏ).
+- Nội dung dạng danh sách xếp thành hàng ngăn bằng đường kẻ mảnh thay cho hộp thẻ có viền (USP, nhóm khách hàng, thông tin liên hệ). Số thứ tự chỉ còn ở Quy trình ("Bước 1–4"), nơi thứ tự có ý nghĩa.
+- Hero: chữ bên trái, ảnh phòng điều trị tràn mép phải; dải 3 điểm tin cậy ở đáy. Bỏ huy hiệu, nét gạch chân vẽ tay và thẻ ảnh nổi. Ảnh mẫu hàm sứ chuyển sang section "Vì sao chọn".
+- Bỏ đường sóng chuyển section; các section nối nhau bằng mép thẳng và nền xen kẽ.
+- Dải "Chưa rõ nên chọn dịch vụ nào?" và danh sách 3 cam kết ở section Đặt lịch: người dùng đã tự bỏ. Nút "Đặt lịch tư vấn" sau phần dịch vụ (mục 3) vẫn có trên từng thẻ dịch vụ.
+
+
+### GD-10: Section Dịch vụ dạng chồng thẻ cuộn (người dùng yêu cầu 02/11/2026) [ĐỀ XUẤT, người dùng duyệt]
+
+Thay cho bố cục Bento ở GD-08.
+- Desktop (≥ 1024px): chia 2 cột. Cột trái cố định khi cuộn: tiêu đề, mô tả và danh sách tên 5 dịch vụ (đánh dấu dịch vụ đang hiển thị, bấm để chuyển tới). Cột phải: 5 thẻ xếp chồng lệch nhau như bộ bài. Khi cuộn trong phạm vi section, thẻ trên cùng trượt xuống rời đi, thẻ kế tiếp lên thay. Thứ tự 1→5 giữ nguyên.
+- Thẻ: ảnh phủ toàn thẻ, tên dịch vụ, mô tả và nút "Đặt lịch tư vấn" nằm đè lên phần dưới ảnh. Lớp nền xanh đậm mờ dần dưới chữ để chữ trắng đạt tương phản (ngoại lệ có chủ đích với quy ước "không gradient" của GD-08).
+- Mobile/tablet và khi người dùng bật giảm chuyển động: các thẻ xếp dọc bình thường, không có hiệu ứng cuộn.
+- Bàn phím: thẻ không ở trên cùng bị loại khỏi thứ tự tab; người dùng chuyển thẻ bằng danh sách dịch vụ ở cột trái.
+
+### GD-11: Section "Phù hợp với ai" dạng carousel lõm (người dùng yêu cầu 02/11/2026) [ĐỀ XUẤT, người dùng duyệt]
+
+- Chia 2 phần trên/dưới. Phần trên: 5 nhóm khách (mục 5) là các thẻ đặt trên mặt trong một vòng cung bao quanh người xem (kiểu "Concave Carousel"); thẻ đang chọn nằm chính diện. Phần dưới: khối "Góc nhận biết nhanh" về răng khôn trải hết chiều ngang.
+- Không dùng component Concave Carousel của React Bits Pro (trả phí, cần license và registry shadcn; dự án không dùng shadcn, quy tắc 5.10 hạn chế thêm dependency). Dev tự viết bằng CSS 3D, không thêm thư viện.
+- Điều khiển: nút trước/sau, phím mũi tên, vuốt/kéo, bấm thẻ bên cạnh, hoặc tab bàn phím vào link trong thẻ. Có vùng thông báo cho trình đọc màn hình. Thứ tự DOM giữ 1→5.
+- **Cập nhật 02/11/2026 (người dùng yêu cầu):** mỗi thẻ dùng 1 ảnh trong `public/images/audience/1–5` làm ảnh nền, chữ đè lên ảnh với lớp nền xanh đậm mờ dần để đủ tương phản. Khi cuộn trang trong phạm vi section, carousel tự xoay ngang lần lượt qua 5 thẻ (vùng cuộn dính, mọi kích thước màn hình); nút/chấm/phím/kéo chuyển trang bằng cách cuộn tới đúng vị trí. Bật giảm chuyển động thì chỉ điều khiển thủ công.
+- Ảnh nền do người dùng cung cấp: (1) hình minh họa AI bác sĩ khám răng, có watermark AI ở góc (bị lớp chữ che); (2) hình minh họa AI người phụ nữ soi gương, có in chữ "T SMILE"/"TSMILE" sai cách viết chuẩn (dòng chữ ở đáy bị lớp chữ che); (3) ảnh thật bé trai niềng răng, thấy rõ mặt (Q-17); (4) ảnh thật ca cấy ghép, đáy ảnh lộ hộp vật liệu (bị lớp chữ che); (5) ảnh phòng điều trị (trùng ảnh hero). Alt của ảnh AI ghi là "hình minh họa".
+
 
 ### GD-02: Phong cách "Chuyên nghiệp" [PHIẾU, diễn giải SUY RA]
 - Bố cục sạch, nhiều khoảng trắng, căn lưới rõ ràng, phân cấp chữ rõ ràng.
@@ -226,6 +259,38 @@ Ba lớp: **Soft UI Evolution** cho hình ảnh tổng thể, **Trust & Authorit
   - `public/images/brand/logo-mark.jpg`: cắt riêng biểu tượng chiếc răng. Dùng ở header (cạnh tên "Nha khoa T-Smile" viết bằng chữ HTML), làm favicon (`app/favicon.ico`, `app/icon.png`, `app/apple-icon.png`) và ảnh OG (`app/opengraph-image.jpg`).
   - Logo có dấu watermark của công cụ tạo ảnh AI. Cần xin khách file logo gốc chất lượng cao, tốt nhất là file vector (Q-14).
 
+### GD-12: Hero ảnh nền tràn màn hình (người dùng yêu cầu 02/11/2026) [ĐỀ XUẤT, người dùng duyệt]
+
+- Thay bố cục hero ở GD-09: ảnh phòng điều trị `hero-banner.jpg` phủ kín section (cao đúng một màn hình trừ header), lớp phủ xanh đậm chuyển dần từ mép trái sang trong suốt, và đậm hơn ở đáy.
+- Tiêu đề, mô tả, nút "Đặt lịch tư vấn" (nút trắng bo tròn) và link hotline nằm góc dưới bên trái, chữ trắng.
+- Thẻ nổi góc dưới bên phải (từ 768px trở lên): hàng 3 biểu tượng và 3 điểm tin cậy lấy từ USP 1 và 3 [SUY RA]. **Không** dùng con số khách hàng hay ảnh đại diện khách như mẫu tham khảo (ND-09, Q-07).
+- Ngoại lệ so với GD-08 (chỉ riêng hero): cho phép lớp phủ gradient và nền thẻ mờ (backdrop blur), vì chữ trắng cần lớp nền đậm trên ảnh để đủ tương phản. Phần nền ngay sau chữ phải giữ ≥ 4,5:1.
+- Tiêu đề hero có hiệu ứng "chữ nổi" (người dùng yêu cầu theo mẫu Rising Ink của React Bits Pro; bản Pro trả phí nên tự viết, không thêm thư viện): chữ nằm yên trên trang, các chữ gần con trỏ chuột / ngón tay nhấc lên theo chiều 3D và đổ bóng, rời con trỏ thì hạ xuống từ từ. Trình đọc màn hình đọc nguyên câu tiêu đề; bật giảm chuyển động (`prefers-reduced-motion`) thì không có hiệu ứng.
+
+### GD-13: Section "Vì sao chọn" dạng giới thiệu 2 cột (người dùng yêu cầu 02/11/2026) [ĐỀ XUẤT, người dùng duyệt]
+
+- Nền trắng (xen kẽ với section Dịch vụ nền xanh nhạt ngay bên dưới). Cột trái: tiêu đề, câu mở đầu, lưới 2×2 ngăn bằng vạch vàng mảnh phía trên mỗi ô. Cột phải: ảnh `about-us.jpg` bo góc, cao bằng cột chữ (desktop).
+- Mẫu tham khảo dùng con số thống kê ("50+ năm", "100+ dự án"…). Phiếu **không có** số liệu (Q-07), nên 4 ô là 4 lý do người dùng cung cấp (ND-06, cập nhật 02/11/2026), mỗi ô có dấu kiểm; nút "Đặt lịch tư vấn" và hotline chuyển xuống dưới lưới.
+- Không dùng nhãn nhỏ phía trên tiêu đề (giữ theo GD-09).
+- Ảnh `about-us.jpg` có chữ in sẵn "NHA KHOA TSMILE" (sai cách viết tên, mục 2.1) và dấu watermark góc dưới phải, nên chỉ hiển thị phần giữa ảnh (mẫu hàm sứ trên bàn đá), cắt bỏ dòng chữ và watermark (Q-18).
+
+### GD-14: Section Quy trình dạng thanh tiến trình 4 bước (người dùng yêu cầu 02/11/2026) [ĐỀ XUẤT, người dùng duyệt]
+
+- Desktop (≥ 1024px): hàng trên là thanh tiến trình — 4 vòng tròn biểu tượng nối bằng một thanh ngang, tên bước nằm dưới vòng tròn. Hàng dưới là 4 thẻ nội dung tương ứng trong một khung nền nhạt.
+- Rê chuột (hoặc focus bàn phím, chạm trên màn hình cảm ứng) vào bước N: thanh màu xanh chạy từ bước 1 tới bước N; các bước trước N hiện dấu kiểm, bước N nổi bật (vòng tròn xanh đậm, thẻ viền xanh), các bước sau ở trạng thái chờ (vòng tròn xám, thẻ viền nét đứt). Khi chưa rê chuột (và khi rời chuột khỏi khối), không bước nào active: cả 4 bước ở trạng thái chờ, thanh trống.
+- Chữ trong thẻ ở trạng thái chờ vẫn giữ tương phản ≥ 4,5:1 (chỉ đổi viền và nền, không làm mờ chữ).
+- Thẻ bước 2 có ảnh nhỏ phim CT (`clinic/chup-phim-ct.jpg`); thẻ bước 4 có nút "Đặt lịch tư vấn". Bỏ ảnh lớn và chú thích ảnh cũ.
+- Dưới 1024px: ẩn thanh tiến trình, các thẻ xếp 1–2 cột, mỗi thẻ có số bước và biểu tượng riêng.
+- `prefers-reduced-motion`: đổi trạng thái tức thì, không chạy thanh.
+
+### GD-15: Hiệu ứng hiện khi cuộn cho mọi section (người dùng yêu cầu 02/11/2026, dùng bộ CSS người dùng cung cấp) [ĐỀ XUẤT, người dùng duyệt]
+
+- Kiểu hiệu ứng khai báo bằng `data-reveal`: để trống (chỉ hiện dần), `up`, `left`, `right`, `flip`, `grow-x`, `grow-c`, `blur`; ảnh trong khối có class `reveal-zoom` thì phóng to rồi lắng về đúng cỡ. Hiện trong 1s; độ trễ so le bằng `--reveal-delay`.
+- **Chạy lại mỗi lần cuộn tới:** khối cuộn vào màn hình (lên hoặc xuống) thì hiện; ra **hẳn** khỏi màn hình thì ẩn lại (ẩn nhanh 0,35s) để lần sau cuộn tới lại chạy.
+- Phân bổ: Hero (đoạn mô tả và nút; **không** áp cho tiêu đề và ảnh nền vì là phần tử LCP), Vì sao chọn (tiêu đề từ trái, 4 ô trượt lên so le, ảnh từ phải + phóng nhẹ), Dịch vụ (tiêu đề từ trái, chồng thẻ trượt lên), Phù hợp với ai (hiện dần — không dùng transform/blur vì làm hỏng carousel 3D), Quy trình (tiêu đề mờ nét → rõ, khối bước trượt lên), Đặt lịch (cột trái từ trái, form từ phải), Liên hệ (tiêu đề trượt lên, thông tin từ trái, bản đồ từ phải).
+- Chống thanh cuộn ngang khi phần tử trượt từ hai bên: `main` có `overflow-x: clip` (không ảnh hưởng phần dính `sticky`).
+- Không có JavaScript hoặc bật giảm chuyển động: mọi khối hiện ngay, không hiệu ứng. Không dùng các class `deco-float`, `lightbox-fade` trong bộ CSS gốc vì trang không có hoạ tiết bồng bềnh hay bộ sưu tập ảnh.
+
 ### GD-04: Ảnh và tư liệu [PHIẾU]
 - Nguồn: https://drive.google.com/drive/folders/1dpfSpcmbee_e0mMXOoXe2QLemSDSHp4n?usp=drive_link
 - Chỉ dùng ảnh khách cung cấp. Nếu buộc phải dùng ảnh minh họa cho demo thì ảnh phải có giấy phép miễn phí, phải ghi nguồn vào mục 13, và **không** được trình bày như thể đó là bác sĩ, bệnh nhân hay cơ sở thật của T-Smile.
@@ -234,7 +299,9 @@ Ba lớp: **Soft UI Evolution** cho hình ảnh tổng thể, **Trust & Authorit
 
 | File trên web | Ảnh gốc (`assets/library/`) | Dùng ở |
 |---|---|---|
-| `clinic/phong-dieu-tri.jpg` | `598254122_…` (phòng điều trị, ghế nha, màn hình X-quang) | Hero (ảnh chính), ảnh OG |
+| `hero-banner.jpg` | Người dùng đưa vào 02/11/2026 (cùng phòng điều trị với `598254122_…`, bản lớn 1276×956) | Hero, ảnh nền (GD-12) |
+| `about-us.jpg` | Người dùng đưa vào (440×590, có chữ "NHA KHOA TSMILE" và watermark, nghi ảnh tạo bằng AI) | Section Vì sao chọn (GD-13), chỉ hiện phần giữa ảnh |
+| `clinic/phong-dieu-tri.jpg` | `598254122_…` (phòng điều trị, ghế nha, màn hình X-quang) | Ảnh OG |
 | `clinic/mau-ham-rang-su.jpg` | `597696843_…` (mẫu hàm sứ trên bàn đá; bỏ dòng chữ phía trên) | Hero (thẻ ảnh nổi) |
 | `clinic/chup-phim-ct.jpg` | `585341266_…` (màn hình phim CT, khách chụp phim; bỏ khung chữ trên và dưới) | Section Quy trình |
 | `services/rang-ham-mat.jpg` | `586033401_…` (phim X-quang toàn hàm) | Dịch vụ 1 |
@@ -261,7 +328,7 @@ Ba lớp: **Soft UI Evolution** cho hình ảnh tổng thể, **Trust & Authorit
 - **Hero:** cao vừa một màn hình trên desktop. Chữ 55% bên trái, cụm ảnh 45% bên phải (ảnh phòng điều trị + thẻ ảnh mẫu hàm sứ nổi). Badge nền vàng chữ tối.
 - **Dịch vụ:** lưới 6 cột trên desktop. 3 thẻ đầu mỗi thẻ 2 cột, 2 thẻ cuối mỗi thẻ 3 cột, giữ đúng thứ tự mục 4. Bấm "Đặt lịch tư vấn" trên thẻ thì cuộn tới form và chọn sẵn dịch vụ đó.
 - **Phù hợp với ai:** 5 nhóm khách (mục 5), mỗi nhóm gắn link tới dịch vụ liên quan. Bên cạnh là khối **"Góc nhận biết nhanh: răng khôn của Quý khách thuộc kiểu nào?"**, lấy ý từ ảnh khách đăng (`585378209_…`) gồm 4 kiểu: mọc nằm ngang, mọc lấp ló, mọc ngầm, mọc thẳng. Đã bỏ con số "90%" và lời văn kiểu mạng xã hội. Cần khách xác nhận nội dung.
-- **Quy trình:** timeline ngang 4 bước trên desktop, timeline dọc trên mobile, có ảnh phim CT minh họa bước 2.
+- **Quy trình:** *(cập nhật theo GD-14)* thanh tiến trình 4 bước + 4 thẻ trên desktop, thẻ xếp cột trên mobile; ảnh phim CT nằm trong thẻ bước 2.
 - **Hiệu ứng:** hiện dần và trượt nhẹ lên khi cuộn (`data-reveal`, có hook IntersectionObserver), thẻ nổi nhẹ khi rê chuột. Tắt toàn bộ khi người dùng bật `prefers-reduced-motion`.
 - **Khác với bản mô tả ở 2 chỗ để giữ đúng quy tắc nội dung:** tiêu đề USP 2 dùng "Dịch vụ đa dạng" thay cho "Dịch vụ chuyên sâu, đa dạng" vì phiếu không nói "chuyên sâu"; badge hero dùng icon SVG chiếc răng thay emoji 🦷 để hiển thị giống nhau trên mọi máy.
 
@@ -331,9 +398,9 @@ Chữ "Trang" trong phiếu không rõ nghĩa: có thể là "Trang chủ" bị 
 
 | # | Section | `id` anchor | Nội dung | Nguồn |
 |---|---|---|---|---|
-| 1 | Header (dính trên cùng) | — | Logo, menu (Giới thiệu, Dịch vụ, Quy trình, Liên hệ), hotline, nút "Đặt lịch tư vấn". Trên mobile: nút menu mở Drawer + nút gọi. | [SUY RA] |
+| 1 | Header (dính trên cùng) | — | Logo, menu (Giới thiệu, Dịch vụ, Quy trình, Liên hệ), hotline, nút "Đặt lịch tư vấn". Trên mobile: nút menu mở Drawer + nút gọi. Drawer phủ **toàn chiều ngang** màn hình và **khóa cuộn trang** khi đang mở (người dùng yêu cầu 02/11/2026). | [SUY RA] |
 | 2 | Hero | `trang-chu` | ND-08, nút "Đặt lịch tư vấn" và "Gọi 0985 329 550", ảnh phòng khám | [PHIẾU] |
-| 3 | Vì sao chọn T-Smile | `gioi-thieu` | 3 USP (ND-06) | [PHIẾU] |
+| 3 | Vì sao chọn T-Smile | `gioi-thieu` | 4 lý do người dùng cung cấp (ND-06, cập nhật 02/11/2026) | Người dùng cung cấp, chờ khách xác nhận (Q-19) |
 | 4 | Dịch vụ | `dich-vu` | 5 thẻ dịch vụ (mục 4), mỗi thẻ có nút "Đặt lịch tư vấn" chọn sẵn dịch vụ | [PHIẾU] |
 | 5 | Phù hợp với ai | `khach-hang` | 4–5 nhóm khách (mục 5) gắn với dịch vụ, kèm khối "Góc nhận biết nhanh" về răng khôn (GD-07) | [PHIẾU] + [ĐỀ XUẤT] |
 | 6 | Quy trình thăm khám & tư vấn | `quy-trinh` | ND-07 | [SUY RA] |
@@ -394,15 +461,18 @@ Chữ "Trang" trong phiếu không rõ nghĩa: có thể là "Trang chủ" bị 
 | Q-13 | Link Drive logo và ảnh có mở được không (quyền truy cập)? | GD-03, GD-04 | ✅ Người dùng đã đưa logo và ảnh vào repo (02/11/2026) |
 | Q-14 | Xin khách file logo gốc chất lượng cao (vector/PNG nền trong). File hiện có là ảnh JPG 1024px, có watermark của công cụ tạo ảnh AI | GD-03, favicon, OG | ⏳ Chờ sale |
 | Q-15 | Xin khách ảnh gốc độ phân giải cao (ảnh hiện có rộng tối đa 590px, tải lại từ Facebook), nhất là ảnh phòng khám | GD-04, chất lượng hero | ⏳ Chờ sale |
+| Q-17 | Ảnh `audience/3` là ảnh thật một bé trai thấy rõ mặt (và yếm in tên). Khách đã có đồng ý của phụ huynh để dùng làm quảng cáo chưa? Nếu chưa, phải thay ảnh trước khi công khai | GD-11, quyền riêng tư | ⏳ Chờ sale |
+| Q-18 | Ảnh `audience/1`, `audience/2`, `about-us.jpg` là ảnh tạo bằng AI (có watermark, chữ "T SMILE" sai cách viết). Khách có đồng ý dùng ảnh AI không, hay cung cấp ảnh thật? | GD-04, GD-11 | ⏳ Chờ sale |
+| Q-19 | Section "Vì sao chọn" dùng 4 ý "Lý do khách hàng chọn T-Smile" do người dùng cung cấp 02/11/2026. Ý 2–4 ("phòng khám sạch – vô khuẩn – trang thiết bị đầy đủ", "chi phí minh bạch", "chăm sóc sau điều trị chu đáo") không có trong phiếu: khách đã xác nhận và chịu trách nhiệm nội dung này chưa? | ND-06, mục 1 quy tắc | ⏳ Chờ sale |
 | Q-16 | Khách có đồng ý đưa khối "Góc nhận biết nhanh" về răng khôn (lấy ý từ bài đăng của khách) lên website không? | GD-07 | ⏳ Chờ sale |
 
 **Danh sách nội dung tạm và placeholder đang có trong code:** *(dev cập nhật mỗi khi thêm hoặc gỡ)*
 
 Mọi mục dưới đây được đánh dấu `TODO(content)` trong code và cần sale/khách xác nhận:
-- `components/sections/WhyUsSection.tsx`: câu mở đầu section [ĐỀ XUẤT, SUY RA từ USP 1 và 3].
+- `components/sections/WhyUsSection.tsx`: câu mở đầu section [ĐỀ XUẤT, SUY RA từ USP 1 và 3]; 4 lý do chờ khách xác nhận (Q-19).
 - `components/sections/ServicesSection.tsx`: tiêu đề, câu mở đầu và dải kêu gọi "Chưa rõ nên chọn dịch vụ nào?" [ĐỀ XUẤT].
 - `components/sections/AudienceSection.tsx`: tiêu đề, câu mở đầu; nhãn nhóm 5 "Quý khách có yêu cầu cao" (viết lại từ "Khách có thu nhập khá"); toàn bộ khối "Góc nhận biết nhanh" về răng khôn (Q-16).
-- `components/sections/ProcessSection.tsx`: câu mở đầu, chú thích ảnh; bước 4 [ĐỀ XUẤT theo ND-07].
+- `components/sections/ProcessSection.tsx`: câu mở đầu; bước 4 [ĐỀ XUẤT theo ND-07].
 - `components/sections/BookingSection.tsx`: lời mời đặt lịch bên trái form [ĐỀ XUẤT].
 - `components/sections/ContactSection.tsx`: câu mở đầu section [ĐỀ XUẤT].
 - `components/sections/HeroSection.tsx`: dòng 3 điểm tin cậy (Trust & Authority) lấy ý từ USP 1 và 3 [SUY RA].
@@ -455,5 +525,18 @@ Chỉ chọn trạng thái **"Xong - chờ sale gửi"** khi tất cả các m�
 | Ngày | Phiên bản | Nội dung | Người sửa |
 |---|---|---|---|
 | 02/11/2026 | 1.0 | Tạo tài liệu từ Phiếu Dev 50 | — |
+| 02/11/2026 | 1.15 | Mục 10: menu mobile (Drawer) rộng toàn màn hình, khóa cuộn trang khi mở. | Dev (Claude Code) |
+| 02/11/2026 | 1.14 | GD-08: quy tắc ngắt dòng, không để một chữ đứng một mình ở dòng cuối. | Dev (Claude Code) |
+| 02/11/2026 | 1.13 | Section 6 và ND-06: section Vì sao chọn dùng 4 lý do người dùng cung cấp. Cập nhật GD-13. Thêm Q-19. | Dev (Claude Code) |
+| 02/11/2026 | 1.12 | Thêm GD-15: hiệu ứng hiện khi cuộn (nhiều kiểu) cho mọi section, chạy lại mỗi lần cuộn tới. | Dev (Claude Code) |
+| 02/11/2026 | 1.11 | GD-14: mặc định không bước nào active, chỉ active khi rê chuột. | Dev (Claude Code) |
+| 02/11/2026 | 1.10 | Thêm GD-14: section Quy trình dạng thanh tiến trình 4 bước, rê chuột vào bước nào thì thanh chạy tới bước đó. | Dev (Claude Code) |
+| 02/11/2026 | 1.9 | Thêm GD-13: section Vì sao chọn dạng 2 cột (chữ + lưới 2×2 bên trái, ảnh about-us bên phải). Q-18 thêm ảnh about-us. | Dev (Claude Code) |
+| 02/11/2026 | 1.8 | GD-12: thêm hiệu ứng chữ nổi (Rising Ink) cho tiêu đề hero. | Dev (Claude Code) |
+| 02/11/2026 | 1.7 | Thêm GD-12: hero dùng ảnh nền tràn màn hình, chữ góc dưới trái, thẻ nổi 3 điểm tin cậy góc dưới phải. | Dev (Claude Code) |
+| 02/11/2026 | 1.6 | GD-11: thêm ảnh nền cho 5 thẻ nhóm khách, carousel tự xoay theo cuộn trang. Thêm Q-17, Q-18. | Dev (Claude Code) |
+| 02/11/2026 | 1.5 | Thêm GD-11: section Phù hợp với ai dạng carousel lõm (tự viết, không dùng React Bits Pro), khối răng khôn chuyển xuống dưới. | Dev (Claude Code) |
+| 02/11/2026 | 1.4 | Thêm GD-10: section Dịch vụ dạng chồng thẻ cuộn, chữ đè lên ảnh, thay cho Bento. | Dev (Claude Code) |
+| 02/11/2026 | 1.3 | Thêm GD-09: đổi bố cục sang kiểu tài liệu phòng khám (tiêu đề lệch trái, hàng có đường kẻ thay thẻ, hero ảnh tràn mép, bỏ đường sóng). | Dev (Claude Code) |
 | 02/11/2026 | 1.2 | Đổi bảng màu theo chỉ đạo người dùng (GD-01), thêm GD-08 (Soft UI Evolution, Trust & Authority, Accessible & Ethical, Flat Design, Bento, Micro-interactions). Ghi rõ ràng buộc tương phản của `#059669` và `#F59E0B`. | Dev (Claude Code) |
 | 02/11/2026 | 1.1 | Áp dụng bản mô tả giao diện chi tiết của người dùng (GD-07). Thêm token `brand-green-100`, `brand-yellow-light`, `line`, `danger` (GD-01). Ghi nhận logo và ảnh khách gửi, danh sách ảnh dùng/không dùng (GD-03, GD-04). Đóng Q-08, Q-13. Thêm Q-14, Q-15, Q-16. Ghi danh sách nội dung tạm (mục 13). | Dev (Claude Code) |

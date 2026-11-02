@@ -4,7 +4,6 @@ import logo from '@/public/images/brand/logo-t-smile.jpg'
 import { navItems, sectionIds, siteConfig } from '@/lib/site-config'
 import { services } from '@/lib/services'
 import Container from '@/components/ui/Container'
-import { Wave } from '@/components/ui/Decor'
 import { ChatIcon, FacebookIcon, MapPinIcon, PhoneIcon } from '@/components/ui/Icons'
 
 /** Footer (mục 10 #9). pb lớn trên mobile để thanh liên hệ nổi không che chữ. */
@@ -14,8 +13,7 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-brand-green-dark text-surface/85">
-      <Wave className="fill-surface" />
-      <Container className="pt-10 pb-28 md:pb-10 lg:pt-14">
+      <Container className="pt-14 pb-28 md:pb-10 lg:pt-20">
         <div className="grid gap-10 md:grid-cols-12 lg:gap-12">
           <div className="md:col-span-12 lg:col-span-5">
             <div className="flex items-center gap-4">
