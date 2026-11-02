@@ -1,0 +1,188 @@
+@layer theme, base, antd, components, utilities;
+
+@import "tailwindcss";
+
+/*
+ * Design token (GD-01, GD-08). PHẢI khớp 1–1 với lib/theme.ts.
+ * Đây là một trong hai nơi duy nhất được viết mã màu hex.
+ * Tắt bảng màu mặc định của Tailwind để code chỉ dùng được token dưới đây.
+ */
+@theme {
+  --color-*: initial;
+  --color-brand-green: #059669;
+  --color-brand-green-strong: #047857;
+  --color-brand-green-dark: #065F46;
+  --color-brand-green-light: #ECFDF5;
+  --color-brand-green-100: #D1FAE5;
+  --color-brand-yellow: #F59E0B;
+  --color-brand-yellow-light: #FEF3C7;
+  --color-success: #22C55E;
+  --color-ink: #1F2937;
+  --color-ink-muted: #4B5563;
+  --color-surface: #FFFFFF;
+  --color-line: #7C8C82;
+  --color-danger: #B91C1C;
+
+  /* Soft UI Evolution: bóng đổ mềm nhiều lớp, nhẹ hơn neumorphism, rõ hơn flat */
+  --shadow-soft:
+    0 1px 2px color-mix(in oklab, var(--color-ink) 5%, transparent),
+    0 2px 6px color-mix(in oklab, var(--color-ink) 5%, transparent);
+  --shadow-soft-lg:
+    0 2px 4px color-mix(in oklab, var(--color-ink) 5%, transparent),
+    0 12px 28px -8px color-mix(in oklab, var(--color-ink) 14%, transparent);
+  --shadow-float:
+    0 4px 8px color-mix(in oklab, var(--color-ink) 6%, transparent),
+    0 18px 40px -12px color-mix(in oklab, var(--color-ink) 22%, transparent);
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-enter: enter 0.3s var(--ease-soft) both;
+  --animate-pop: pop 0.3s var(--ease-soft) both;
+  --animate-shake: shake 0.3s ease-in-out;
+  --animate-draw: draw 0.4s 0.15s var(--ease-soft) both;
+
+  @keyframes float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -8px;
+    }
+  }
+
+  @keyframes enter {
+    from {
+      opacity: 0;
+      translate: 0 12px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes pop {
+    from {
+      opacity: 0;
+      scale: 0.6;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes shake {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    25% {
+      translate: -6px 0;
+    }
+    75% {
+      translate: 6px 0;
+    }
+  }
+
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 24;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+/* Font nạp bằng next/font (subset latin + vietnamese) trong app/layout.tsx */
+@theme inline {
+  --font-sans: var(--font-be-vietnam-pro), sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Bù chiều cao header dính: 64px mobile, 80px desktop */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (min-width: 64rem) {
+    html {
+      scroll-padding-top: 6rem;
+    }
+  }
+
+  /* Chặn tràn ngang; dùng clip để không phá position: sticky */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  ::selection {
+    background: var(--color-brand-yellow);
+    color: var(--color-ink);
+  }
+
+  /* Accessible & Ethical: vòng focus 3px, luôn nhìn thấy */
+  :focus-visible {
+    outline: 3px solid var(--color-brand-green-strong);
+    outline-offset: 3px;
+  }
+}
+
+/*
+ * Hiện dần khi cuộn tới. JS gắn class .is-revealed nằm ở components/ui/RevealObserver.tsx
+ * (IntersectionObserver). Không dùng data-reveal cho phần tử LCP của hero.
+ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s var(--ease-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (scripting: none) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
