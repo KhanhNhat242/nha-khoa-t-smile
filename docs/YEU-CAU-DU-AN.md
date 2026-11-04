@@ -308,6 +308,11 @@ Thay cho bố cục Bento ở GD-08.
 - Dưới 1280px: mảng xanh chứa chữ, nút và ảnh bác sĩ xếp dọc. Thẻ trắng (USP 3 và 2 điểm tin cậy) nằm bên dưới, không có thẻ liên hệ vì đã có thanh liên hệ nổi.
 - Ảnh tách nền do dev làm từ ảnh gốc nền trắng. *(04/11/2026)* Viền tóc được tách lại theo độ trắng của từng điểm ảnh để bỏ các mảng trắng sót quanh tóc. Nếu khách có file PNG nền trong thì nên thay (Q-20).
 
+### GD-17: Section Đặt lịch — cột chữ bám dính (người dùng yêu cầu 04/11/2026) [ĐỀ XUẤT, người dùng duyệt]
+
+- Từ 1024px (bố cục 2 cột): cột trái (tiêu đề, lời mời, hotline, nút Gọi/Zalo) dùng `position: sticky`, bám ngay dưới header khi cuộn trong phạm vi section, hết section thì cuộn đi theo trang. Cột form bên phải cuộn bình thường.
+- Hiệu ứng `data-reveal` đặt ở lớp bên trong, không đặt trên phần tử dính (theo GD-15). Dưới 1024px hai khối xếp dọc, không bám dính.
+
 ### GD-04: Ảnh và tư liệu [PHIẾU]
 - Nguồn: https://drive.google.com/drive/folders/1dpfSpcmbee_e0mMXOoXe2QLemSDSHp4n?usp=drive_link
 - Chỉ dùng ảnh khách cung cấp. Nếu buộc phải dùng ảnh minh họa cho demo thì ảnh phải có giấy phép miễn phí, phải ghi nguồn vào mục 13, và **không** được trình bày như thể đó là bác sĩ, bệnh nhân hay cơ sở thật của T-Smile.
@@ -316,7 +321,7 @@ Thay cho bố cục Bento ở GD-08.
 
 | File trên web | Ảnh gốc (`assets/library/`) | Dùng ở |
 |---|---|---|
-| `hero-banner.jpg` | Người dùng đưa vào 02/11/2026 (cùng phòng điều trị với `598254122_…`, bản lớn 1276×956) | Không còn dùng từ 04/11/2026 (hero đổi sang GD-16); giữ file để dùng lại nếu cần |
+| `hero-banner.jpg` | Người dùng đưa vào 02/11/2026 (cùng phòng điều trị với `598254122_…`, bản lớn 1276×956) | Không còn dùng (đã thử làm nền section Đặt lịch ngày 04/11/2026, người dùng gỡ lại); giữ file để dùng lại nếu cần |
 | `hero-doctor.webp` | `hero-banner2.png` (người dùng đưa vào 04/11/2026, ảnh bác sĩ áo blouse cầm tập tài liệu T-Smile, nền trắng 2048×2048). Dev tách nền trắng, cắt sát người, thu về 1200px | Hero (GD-16) |
 | `about-us.jpg` | Người dùng đưa vào (440×590, có chữ "NHA KHOA TSMILE" và watermark, nghi ảnh tạo bằng AI) | Section Vì sao chọn (GD-13), chỉ hiện phần giữa ảnh |
 | `clinic/phong-dieu-tri.jpg` | `598254122_…` (phòng điều trị, ghế nha, màn hình X-quang) | Ảnh OG |
@@ -544,6 +549,8 @@ Chỉ chọn trạng thái **"Xong - chờ sale gửi"** khi tất cả các m�
 | Ngày | Phiên bản | Nội dung | Người sửa |
 |---|---|---|---|
 | 02/11/2026 | 1.0 | Tạo tài liệu từ Phiếu Dev 50 | — |
+| 04/11/2026 | 1.22 | Thêm GD-17: cột chữ section Đặt lịch bám dính dưới header (desktop). Gỡ ảnh nền section Đặt lịch theo thay đổi của người dùng. | Dev (Claude Code) |
+| 04/11/2026 | 1.21 | Section Đặt lịch: dùng `hero-banner.jpg` làm ảnh nền toàn chiều ngang, có lớp phủ trắng giữ tương phản chữ. | Dev (Claude Code) |
 | 04/11/2026 | 1.20 | GD-16: giới hạn chiều cao hero trên desktop lớn (tối đa 50rem). | Dev (Claude Code) |
 | 04/11/2026 | 1.19 | GD-16: khi ở hero thì ẩn cả header (từ 1280px), logo chuyển vào thẻ trắng cạnh menu; câu USP 3 bỏ data-reveal để luôn hiện. | Dev (Claude Code) |
 | 04/11/2026 | 1.18 | GD-16: menu chính nằm trong thẻ trắng của hero khi hero còn trên màn hình, cuộn qua thì trở về header (có hiệu ứng). Câu USP 3 căn giữa theo chiều dọc. | Dev (Claude Code) |
