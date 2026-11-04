@@ -12,11 +12,13 @@ import MobileMenu from './MobileMenu'
  * Header (mục 10 #1, GD-08 Trust & Authority).
  * Thanh thông tin trên cùng (desktop): địa chỉ, hotline, Facebook — nền xanh đậm, chữ trắng 7,68:1.
  * Header chính dính trên cùng, có vạch màu nhận diện (token brand-green) ở mép trên.
+ * GD-16: từ 1280px header là `fixed`, ẩn hẳn (trượt lên) khi hàng logo + menu trong hero còn trên màn hình;
+ * cuộn qua thì trượt xuống. Trạng thái do HeroNavObserver gắn `data-past-hero` lên <html>.
  */
 export default function Header() {
   return (
     <>
-      <div className="hidden bg-brand-green-dark text-[0.9375rem] text-surface md:block">
+      {/* <div className="hidden bg-brand-green-dark text-[0.9375rem] text-surface md:block">
         <Container className="flex h-10 items-center justify-between gap-6">
           <p className="flex min-w-0 items-center gap-2">
             <MapPinIcon className="size-4 shrink-0" />
@@ -41,9 +43,9 @@ export default function Header() {
             </a>
           </div>
         </Container>
-      </div>
+      </div> */}
 
-      <header className="sticky top-0 z-50 border-t-[3px] border-b border-t-brand-green border-b-brand-green-100 bg-surface">
+      <header className="sticky top-0 z-50 border-t-[3px] border-b border-t-brand-green border-b-brand-green-100 bg-surface xl:invisible xl:fixed xl:inset-x-0 xl:-translate-y-full xl:transition-[translate,visibility] xl:duration-300 xl:ease-soft xl:in-data-[past-hero]:visible xl:in-data-[past-hero]:translate-y-0">
         <Container className="flex h-16 items-center justify-between gap-4 lg:h-20">
           <BrandLink />
 

@@ -10,16 +10,15 @@ import { revealDelay } from '@/components/ui/reveal'
 import BookingForm from './BookingForm'
 import BookingFormSkeleton from './BookingFormSkeleton'
 
-/** Section "Đặt lịch tư vấn" (#dat-lich) — CN-03, dải xanh lá đậm toàn chiều ngang. */
+/** Section "Đặt lịch tư vấn" (#dat-lich) — CN-03, nền trắng, thẻ form xanh lá đậm. */
 export default function BookingSection() {
   return (
-    <section id={sectionIds.booking} aria-labelledby="booking-title" className="bg-brand-green-dark text-surface">
+    <section id={sectionIds.booking} aria-labelledby="booking-title" className="bg-surface text-ink">
       <Container className="grid gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-28">
         <div data-reveal="left" className="lg:col-span-5">
           {/* TODO(content): lời mời đặt lịch [ĐỀ XUẤT] — chờ khách xác nhận (mục 13). */}
           <SectionHeading
             layout="stack"
-            tone="dark"
             titleId="booking-title"
             title={
               <>
@@ -29,11 +28,11 @@ export default function BookingSection() {
             description={`Quý khách để lại thông tin, ${siteConfig.name} sẽ liên hệ lại để xác nhận lịch hẹn. Cần tư vấn ngay, Quý khách vui lòng gọi hotline hoặc nhắn Zalo.`}
           />
 
-          <div className="mt-10 border-t border-surface/20 pt-8">
-            <p className="text-sm font-bold tracking-[0.08em] text-surface/85 uppercase">Hotline</p>
+          <div className="mt-10 border-t border-brand-green-100 pt-8">
+            <p className="text-sm font-bold tracking-[0.08em] text-ink-muted uppercase">Hotline</p>
             <a
               href={siteConfig.phone.href}
-              className="mt-2 inline-block text-[2.25rem] leading-none font-bold tracking-[-0.01em] underline-offset-8 hover:underline sm:text-5xl"
+              className="mt-2 inline-block text-[2.25rem] leading-none font-bold text-brand-green-strong tracking-[-0.01em] underline-offset-8 hover:underline sm:text-5xl"
             >
               {siteConfig.phone.display}
             </a>
@@ -49,7 +48,7 @@ export default function BookingSection() {
                 href={siteConfig.zalo.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center gap-2 rounded-xl border-2 border-surface/50 px-5 font-bold transition-colors duration-200 hover:border-surface hover:bg-surface hover:text-brand-green-dark"
+                className="inline-flex min-h-12 items-center gap-2 rounded-xl border-2 border-brand-green-strong px-5 font-bold text-brand-green-strong transition-colors duration-200 hover:bg-brand-green-strong hover:text-surface"
               >
                 <ChatIcon className="size-5" />
                 {siteConfig.zalo.label}
@@ -59,10 +58,11 @@ export default function BookingSection() {
         </div>
 
         <div data-reveal="right" className="lg:col-span-6 lg:col-start-7" style={revealDelay(150)}>
-          <div className="rounded-2xl bg-surface p-6 text-ink shadow-float sm:p-8 lg:p-10">
-            <h3 className="text-2xl font-bold tracking-[-0.01em] text-ink">Thông tin đặt lịch</h3>
-            <p className="mt-1.5 text-base text-ink-muted">
-              Các mục có dấu <span className="font-bold text-danger">*</span> là bắt buộc.
+          {/* Thẻ nền xanh đậm: chữ của antd Form (label, dấu *, lỗi, bộ đếm) đổi sang màu sáng để đủ tương phản */}
+          <div className="rounded-2xl bg-brand-green-dark p-6 text-surface shadow-float sm:p-8 lg:p-10 [&_.ant-form-item-explain-error]:text-brand-yellow-light [&_.ant-form-item-label>label]:text-surface [&_.ant-form-item-required::before]:!text-brand-yellow-light [&_.ant-input-data-count]:text-surface/80 [&_:focus-visible]:outline-surface">
+            <h3 className="text-2xl font-bold tracking-[-0.01em] text-surface">Thông tin đặt lịch</h3>
+            <p className="mt-1.5 text-base text-surface/85">
+              Các mục có dấu <span className="font-bold text-brand-yellow-light">*</span> là bắt buộc.
             </p>
             <div className="mt-7">
               <AntdIsland fallback={<BookingFormSkeleton />}>

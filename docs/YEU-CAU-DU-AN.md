@@ -171,7 +171,7 @@ Nguyên văn (giữ cả emoji):
 > 📞 Hotline: 0985 329 550
 
 Cách dùng:
-- **ND-08 (Hero):** Tiêu đề lấy từ dòng 1: *"Nha khoa T-Smile – Niềng răng, Cấy ghép Implant & Răng sứ thẩm mỹ"*. Mô tả lấy từ dòng 2 (đổi tên thương hiệu theo ND-01).
+- **ND-08 (Hero):** Tiêu đề lấy từ dòng 1: *"Nha khoa T-Smile – Niềng răng, Cấy ghép Implant & Răng sứ thẩm mỹ"*. Mô tả lấy từ dòng 2 (đổi tên thương hiệu theo ND-01). *(04/11/2026: người dùng bỏ câu mô tả khỏi hero, chỉ giữ ở footer — GD-16.)*
 - **ND-09:** "hàng ngàn khách hàng" là câu của khách. Được dùng đúng câu này, nhưng **không** đổi thành con số cụ thể (ví dụ "5.000+ khách hàng") và không làm bộ đếm số liệu.
 - Giờ mở cửa, bảng giá, giới thiệu đội ngũ: phiếu **không có**, là [THIẾU] (Q-07).
 
@@ -261,6 +261,8 @@ Thay cho bố cục Bento ở GD-08.
 
 ### GD-12: Hero ảnh nền tràn màn hình (người dùng yêu cầu 02/11/2026) [ĐỀ XUẤT, người dùng duyệt]
 
+*(Bố cục đã được thay bằng GD-16 ngày 04/11/2026. Hiệu ứng chữ nổi của tiêu đề vẫn giữ.)*
+
 - Thay bố cục hero ở GD-09: ảnh phòng điều trị `hero-banner.jpg` phủ kín section (cao đúng một màn hình trừ header), lớp phủ xanh đậm chuyển dần từ mép trái sang trong suốt, và đậm hơn ở đáy.
 - Tiêu đề, mô tả, nút "Đặt lịch tư vấn" (nút trắng bo tròn) và link hotline nằm góc dưới bên trái, chữ trắng.
 - Thẻ nổi góc dưới bên phải (từ 768px trở lên): hàng 3 biểu tượng và 3 điểm tin cậy lấy từ USP 1 và 3 [SUY RA]. **Không** dùng con số khách hàng hay ảnh đại diện khách như mẫu tham khảo (ND-09, Q-07).
@@ -291,6 +293,21 @@ Thay cho bố cục Bento ở GD-08.
 - Chống thanh cuộn ngang khi phần tử trượt từ hai bên: `main` có `overflow-x: clip` (không ảnh hưởng phần dính `sticky`).
 - Không có JavaScript hoặc bật giảm chuyển động: mọi khối hiện ngay, không hiệu ứng. Không dùng các class `deco-float`, `lightbox-fade` trong bộ CSS gốc vì trang không có hoạ tiết bồng bềnh hay bộ sưu tập ảnh.
 
+### GD-16: Hero 2 mảng màu, ảnh bác sĩ ở giữa (người dùng yêu cầu 04/11/2026, theo ảnh mẫu) [ĐỀ XUẤT, người dùng duyệt]
+
+- Thay bố cục GD-12. Nền section xanh lá đậm. Thẻ trắng bo góc lớn chiếm phần bên phải (từ 1280px trở lên). Ảnh bác sĩ đã tách nền (`hero-doctor.webp`) đứng ở giữa, chân ảnh chạm đáy section và đè lên cả hai mảng màu.
+- Mảng xanh bên trái: tiêu đề ND-08 (giữ hiệu ứng chữ nổi của GD-12), nút "Đặt lịch tư vấn" (nút trắng bo tròn) và link hotline. Góc dưới có 2 thẻ trắng nhỏ lấy ý từ USP 1 [SUY RA].
+- *(04/11/2026, theo chỉ đạo người dùng)* Bỏ nhãn khu vực "Nha khoa tại Phường Hoa Lư, Ninh Bình" và câu mô tả ND-08 khỏi hero. Câu mô tả vẫn hiện ở footer.
+- Nền mảng xanh có hiệu ứng gradient loang: vài đốm màu xanh (token `brand-green`, `brand-green-strong`, `brand-green-100`) và một đốm vàng nhạt trang trí, làm mờ và trôi chậm. Đốm sáng đặt xa vùng chữ để chữ trắng vẫn giữ tương phản ≥ 4,5:1 (tiêu đề cỡ lớn ≥ 3:1). Bật giảm chuyển động thì nền đứng yên.
+- *(04/11/2026, người dùng tự gỡ trong code)* Bỏ 2 thẻ điểm tin cậy góc dưới trái, nhãn nhỏ phía trên câu USP 3, thẻ liên hệ góc dưới phải và 3 nút tròn Gọi/Zalo/Facebook ở đáy. Hero nay gồm: tiêu đề + nút (trái), ảnh bác sĩ (giữa), câu USP 3 (thẻ trắng bên phải).
+- *(04/11/2026, người dùng yêu cầu)* Menu chính (Giới thiệu, Dịch vụ, Quy trình, Liên hệ), từ 1280px: khi hero còn trong màn hình, **ẩn toàn bộ header**; hàng trên cùng của thẻ trắng trong hero gồm logo (bên trái) và menu (bên phải); thẻ trắng hẹp nên từ 1280–1679px chỉ hiện biểu tượng logo, từ 1680px mới hiện thêm tên. Cuộn qua hàng này thì header (logo, menu, nút "Đặt lịch tư vấn") trượt xuống từ mép trên, hàng logo + menu trong hero mờ dần. Cuộn ngược lên đầu trang thì đổi lại. Từ 1280px header dùng `position: fixed` để khi ẩn không để lại khoảng trống; hero cao bằng một màn hình nhưng tối thiểu 40rem và **tối đa 50rem (800px)** để màn hình lớn không bị hero quá cao (người dùng yêu cầu 04/11/2026); câu USP 3 căn giữa theo chiều cao hero. Nút "Đặt lịch tư vấn" vẫn có trong hero nên mục 4.2 vẫn đạt. Dưới 1280px menu giữ như cũ. Bật giảm chuyển động thì đổi tức thì. Câu USP 3 căn giữa theo chiều dọc của thẻ trắng, không dùng hiệu ứng `data-reveal` (nội dung màn hình đầu, luôn hiện).
+- Thẻ trắng bên phải: câu USP 3 (chữ lớn, phần "phương án riêng cho từng người" tô xanh). Góc dưới là thẻ liên hệ: biểu tượng logo, tên đầy đủ, địa chỉ, hotline.
+- Đáy giữa: 3 nút tròn Gọi, Zalo, Facebook.
+- **Khác với ảnh mẫu để giữ đúng quy tắc nội dung:** mẫu có thẻ số liệu ("100%", "200%") và thẻ cảm nhận khách hàng kèm ảnh đại diện. Phiếu không có số liệu và đánh giá (ND-09, Q-07), nên 2 thẻ số liệu thay bằng 2 điểm tin cậy, thẻ cảm nhận thay bằng thẻ liên hệ. Menu nằm trong thẻ trắng của mẫu không làm lại vì site đã có header dính trên cùng.
+- **Không** ghi tên, chức danh hay bằng cấp cho người trong ảnh (Q-07, Q-20). Alt chỉ mô tả "bác sĩ của Nha khoa T-Smile".
+- Dưới 1280px: mảng xanh chứa chữ, nút và ảnh bác sĩ xếp dọc. Thẻ trắng (USP 3 và 2 điểm tin cậy) nằm bên dưới, không có thẻ liên hệ vì đã có thanh liên hệ nổi.
+- Ảnh tách nền do dev làm từ ảnh gốc nền trắng. *(04/11/2026)* Viền tóc được tách lại theo độ trắng của từng điểm ảnh để bỏ các mảng trắng sót quanh tóc. Nếu khách có file PNG nền trong thì nên thay (Q-20).
+
 ### GD-04: Ảnh và tư liệu [PHIẾU]
 - Nguồn: https://drive.google.com/drive/folders/1dpfSpcmbee_e0mMXOoXe2QLemSDSHp4n?usp=drive_link
 - Chỉ dùng ảnh khách cung cấp. Nếu buộc phải dùng ảnh minh họa cho demo thì ảnh phải có giấy phép miễn phí, phải ghi nguồn vào mục 13, và **không** được trình bày như thể đó là bác sĩ, bệnh nhân hay cơ sở thật của T-Smile.
@@ -299,7 +316,8 @@ Thay cho bố cục Bento ở GD-08.
 
 | File trên web | Ảnh gốc (`assets/library/`) | Dùng ở |
 |---|---|---|
-| `hero-banner.jpg` | Người dùng đưa vào 02/11/2026 (cùng phòng điều trị với `598254122_…`, bản lớn 1276×956) | Hero, ảnh nền (GD-12) |
+| `hero-banner.jpg` | Người dùng đưa vào 02/11/2026 (cùng phòng điều trị với `598254122_…`, bản lớn 1276×956) | Không còn dùng từ 04/11/2026 (hero đổi sang GD-16); giữ file để dùng lại nếu cần |
+| `hero-doctor.webp` | `hero-banner2.png` (người dùng đưa vào 04/11/2026, ảnh bác sĩ áo blouse cầm tập tài liệu T-Smile, nền trắng 2048×2048). Dev tách nền trắng, cắt sát người, thu về 1200px | Hero (GD-16) |
 | `about-us.jpg` | Người dùng đưa vào (440×590, có chữ "NHA KHOA TSMILE" và watermark, nghi ảnh tạo bằng AI) | Section Vì sao chọn (GD-13), chỉ hiện phần giữa ảnh |
 | `clinic/phong-dieu-tri.jpg` | `598254122_…` (phòng điều trị, ghế nha, màn hình X-quang) | Ảnh OG |
 | `clinic/mau-ham-rang-su.jpg` | `597696843_…` (mẫu hàm sứ trên bàn đá; bỏ dòng chữ phía trên) | Hero (thẻ ảnh nổi) |
@@ -464,6 +482,7 @@ Chữ "Trang" trong phiếu không rõ nghĩa: có thể là "Trang chủ" bị 
 | Q-17 | Ảnh `audience/3` là ảnh thật một bé trai thấy rõ mặt (và yếm in tên). Khách đã có đồng ý của phụ huynh để dùng làm quảng cáo chưa? Nếu chưa, phải thay ảnh trước khi công khai | GD-11, quyền riêng tư | ⏳ Chờ sale |
 | Q-18 | Ảnh `audience/1`, `audience/2`, `about-us.jpg` là ảnh tạo bằng AI (có watermark, chữ "T SMILE" sai cách viết). Khách có đồng ý dùng ảnh AI không, hay cung cấp ảnh thật? | GD-04, GD-11 | ⏳ Chờ sale |
 | Q-19 | Section "Vì sao chọn" dùng 4 ý "Lý do khách hàng chọn T-Smile" do người dùng cung cấp 02/11/2026. Ý 2–4 ("phòng khám sạch – vô khuẩn – trang thiết bị đầy đủ", "chi phí minh bạch", "chăm sóc sau điều trị chu đáo") không có trong phiếu: khách đã xác nhận và chịu trách nhiệm nội dung này chưa? | ND-06, mục 1 quy tắc | ⏳ Chờ sale |
+| Q-20 | Ảnh hero `hero-banner2.png` là ảnh thật một bác sĩ/nhân viên của T-Smile. Khách đã có đồng ý của người trong ảnh để dùng làm quảng cáo chưa? Có muốn ghi tên, chức danh không (hiện **không** ghi)? Xin file PNG nền trong nếu có | GD-16, quyền riêng tư, Q-07 | ⏳ Chờ sale |
 | Q-16 | Khách có đồng ý đưa khối "Góc nhận biết nhanh" về răng khôn (lấy ý từ bài đăng của khách) lên website không? | GD-07 | ⏳ Chờ sale |
 
 **Danh sách nội dung tạm và placeholder đang có trong code:** *(dev cập nhật mỗi khi thêm hoặc gỡ)*
@@ -475,7 +494,7 @@ Mọi mục dưới đây được đánh dấu `TODO(content)` trong code và c
 - `components/sections/ProcessSection.tsx`: câu mở đầu; bước 4 [ĐỀ XUẤT theo ND-07].
 - `components/sections/BookingSection.tsx`: lời mời đặt lịch bên trái form [ĐỀ XUẤT].
 - `components/sections/ContactSection.tsx`: câu mở đầu section [ĐỀ XUẤT].
-- `components/sections/HeroSection.tsx`: dòng 3 điểm tin cậy (Trust & Authority) lấy ý từ USP 1 và 3 [SUY RA].
+- `components/sections/HeroSection.tsx`: câu USP 3 ở thẻ trắng viết gọn lại từ nguyên văn [SUY RA] (GD-16).
 - `components/layout/Header.tsx`: thanh thông tin trên cùng (địa chỉ, hotline, Facebook) [ĐỀ XUẤT, GD-08].
 - `app/actions/booking.ts`: form chưa gửi dữ liệu đi đâu, có `TODO(booking-destination)` (Q-09). Sau khi gửi, giao diện hiện rõ dòng "bản demo, thông tin chưa được gửi tới phòng khám".
 
@@ -525,6 +544,11 @@ Chỉ chọn trạng thái **"Xong - chờ sale gửi"** khi tất cả các m�
 | Ngày | Phiên bản | Nội dung | Người sửa |
 |---|---|---|---|
 | 02/11/2026 | 1.0 | Tạo tài liệu từ Phiếu Dev 50 | — |
+| 04/11/2026 | 1.20 | GD-16: giới hạn chiều cao hero trên desktop lớn (tối đa 50rem). | Dev (Claude Code) |
+| 04/11/2026 | 1.19 | GD-16: khi ở hero thì ẩn cả header (từ 1280px), logo chuyển vào thẻ trắng cạnh menu; câu USP 3 bỏ data-reveal để luôn hiện. | Dev (Claude Code) |
+| 04/11/2026 | 1.18 | GD-16: menu chính nằm trong thẻ trắng của hero khi hero còn trên màn hình, cuộn qua thì trở về header (có hiệu ứng). Câu USP 3 căn giữa theo chiều dọc. | Dev (Claude Code) |
+| 04/11/2026 | 1.17 | GD-16: bỏ nhãn khu vực và câu mô tả khỏi hero, thêm nền gradient loang cho mảng xanh (người dùng yêu cầu). ND-08: mô tả chỉ còn ở footer. | Dev (Claude Code) |
+| 04/11/2026 | 1.16 | Thêm GD-16: hero 2 mảng màu, ảnh bác sĩ tách nền ở giữa (thay bố cục GD-12). Thêm ảnh `hero-doctor.webp`, Q-20. | Dev (Claude Code) |
 | 02/11/2026 | 1.15 | Mục 10: menu mobile (Drawer) rộng toàn màn hình, khóa cuộn trang khi mở. | Dev (Claude Code) |
 | 02/11/2026 | 1.14 | GD-08: quy tắc ngắt dòng, không để một chữ đứng một mình ở dòng cuối. | Dev (Claude Code) |
 | 02/11/2026 | 1.13 | Section 6 và ND-06: section Vì sao chọn dùng 4 lý do người dùng cung cấp. Cập nhật GD-13. Thêm Q-19. | Dev (Claude Code) |

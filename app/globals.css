@@ -41,6 +41,43 @@
   --animate-pop: pop 0.3s var(--ease-soft) both;
   --animate-shake: shake 0.3s ease-in-out;
   --animate-draw: draw 0.4s 0.15s var(--ease-soft) both;
+  /* Đốm màu trôi chậm của nền gradient loang ở hero (GD-16) */
+  --animate-blob-a: blob-a 18s ease-in-out infinite alternate;
+  --animate-blob-b: blob-b 22s ease-in-out infinite alternate;
+  --animate-blob-c: blob-c 26s ease-in-out infinite alternate;
+
+  @keyframes blob-a {
+    from {
+      translate: 0 0;
+      scale: 1;
+    }
+    to {
+      translate: 18% 12%;
+      scale: 1.15;
+    }
+  }
+
+  @keyframes blob-b {
+    from {
+      translate: 0 0;
+      scale: 1.1;
+    }
+    to {
+      translate: -14% -18%;
+      scale: 0.9;
+    }
+  }
+
+  @keyframes blob-c {
+    from {
+      translate: 0 0;
+      scale: 0.95;
+    }
+    to {
+      translate: 12% -16%;
+      scale: 1.2;
+    }
+  }
 
   @keyframes float {
     0%,

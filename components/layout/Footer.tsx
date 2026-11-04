@@ -12,7 +12,7 @@ export default function Footer() {
     'inline-flex min-h-11 items-center gap-3 text-surface/85 transition-colors duration-200 hover:text-surface hover:underline underline-offset-4'
 
   return (
-    <footer className="relative bg-brand-green-dark text-surface/85">
+    <footer id='lien-he' className="relative bg-brand-green-dark text-surface/85">
       <Container className="pt-14 pb-28 md:pb-10 lg:pt-20">
         <div className="grid gap-10 md:grid-cols-12 lg:gap-12">
           <div className="md:col-span-12 lg:col-span-5">
@@ -93,6 +93,17 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+
+            {/* Bản đồ thu nhỏ (CN-07), cùng nguồn nhúng với ContactSection */}
+            <div className="mt-5 overflow-hidden rounded-xl border border-surface/15 bg-brand-green-light">
+              <iframe
+                title={`Bản đồ vị trí ${siteConfig.fullName}`}
+                src={siteConfig.maps.embedSrc}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block h-44 w-full lg:h-48"
+              />
+            </div>
           </div>
         </div>
 

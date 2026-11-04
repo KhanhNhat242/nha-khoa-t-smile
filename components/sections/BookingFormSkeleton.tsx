@@ -2,8 +2,8 @@
 export default function BookingFormSkeleton() {
   const field = (
     <div>
-      <div className="h-5 w-28 rounded bg-brand-green-100" />
-      <div className="mt-2 h-12 rounded-xl border border-brand-green-100 bg-brand-green-light" />
+      <div className="h-5 w-28 rounded bg-surface/25" />
+      <div className="mt-2 h-12 rounded-xl bg-surface" />
     </div>
   )
   return (
@@ -15,11 +15,11 @@ export default function BookingFormSkeleton() {
         {field}
       </div>
       <div className="mt-5">
-        <div className="h-5 w-20 rounded bg-brand-green-100" />
-        <div className="mt-2 h-24 rounded-xl border border-brand-green-100 bg-brand-green-light" />
+        <div className="h-5 w-20 rounded bg-surface/25" />
+        <div className="mt-2 h-24 rounded-xl bg-surface" />
       </div>
-      <div className="mt-8 h-14 rounded-xl bg-brand-green-strong/70" />
-      <div className="mt-4 h-5 w-4/5 rounded bg-brand-green-100" />
+      <div className="mt-8 h-14 rounded-xl bg-brand-yellow/70" />
+      <div className="mt-4 h-5 w-4/5 rounded bg-surface/25" />
     </div>
   )
 }

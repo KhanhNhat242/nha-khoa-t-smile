@@ -142,7 +142,7 @@ export default function BookingForm({ options }: { options: readonly Option[] })
           ref={successRef}
           tabIndex={-1}
           role="status"
-          className="animate-enter rounded-2xl bg-success/10 p-6 text-center ring-2 ring-success/40 outline-none sm:p-8"
+          className="animate-enter rounded-2xl bg-surface p-6 text-center ring-2 ring-success/40 outline-none sm:p-8"
         >
           <SuccessMark />
           <p className="mt-4 text-xl font-extrabold text-ink">Cảm ơn Quý khách!</p>
@@ -256,7 +256,7 @@ export default function BookingForm({ options }: { options: readonly Option[] })
             <div
               key={status.attempt}
               role="alert"
-              className="mb-5 flex animate-shake items-start gap-3 rounded-xl bg-danger/5 p-4 text-base leading-relaxed text-danger ring-1 ring-danger/30"
+              className="mb-5 flex animate-shake items-start gap-3 rounded-xl bg-surface p-4 text-base leading-relaxed text-danger ring-1 ring-danger/30"
             >
               <AlertIcon className="mt-0.5 size-5 shrink-0" />
               <p>
@@ -274,13 +274,13 @@ export default function BookingForm({ options }: { options: readonly Option[] })
             htmlType="submit"
             block
             loading={isPending}
-            className="h-14 text-[1.0625rem] transition-[background-color,scale] active:scale-[0.98] active:duration-75"
+            className="h-14 bg-brand-yellow text-[1.0625rem] text-ink transition-[background-color,scale] hover:bg-brand-yellow/85 active:scale-[0.98] active:duration-75"
           >
             {isPending ? 'Đang gửi...' : 'Gửi yêu cầu đặt lịch'}
           </Button>
 
-          <p className="mt-4 flex items-start gap-2.5 text-base leading-relaxed text-ink-muted">
-            <ShieldCheckIcon className="mt-0.5 size-5 shrink-0 text-brand-green-strong" />
+          <p className="mt-4 flex items-start gap-2.5 text-base leading-relaxed text-surface/85">
+            <ShieldCheckIcon className="mt-0.5 size-5 shrink-0 text-brand-green-100" />
             Thông tin của Quý khách chỉ được dùng để liên hệ tư vấn và xác nhận lịch hẹn.
           </p>
         </Form>

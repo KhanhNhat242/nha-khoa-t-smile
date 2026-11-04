@@ -19,7 +19,7 @@ export default function HomePage() {
       <AudienceSection />
       <ProcessSection />
       <BookingSection />
-      <ContactSection />
+      {/* <ContactSection /> */}
       <RevealObserver />
     </main>
   )

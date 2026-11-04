@@ -3,8 +3,17 @@ import Image from 'next/image'
 import logoMark from '@/public/images/brand/logo-mark.jpg'
 import { sectionIds, siteConfig } from '@/lib/site-config'
 
-/** Logo (biểu tượng chiếc răng cắt từ logo gốc) + tên phòng khám. */
-export default function BrandLink({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
+/**
+ * Logo (biểu tượng chiếc răng cắt từ logo gốc) + tên phòng khám.
+ * `nameClassName`: class cho khối tên, ví dụ ẩn tên ở chỗ hẹp (link vẫn có aria-label đầy đủ).
+ */
+export default function BrandLink({
+  tone = 'light',
+  nameClassName = '',
+}: {
+  tone?: 'light' | 'dark'
+  nameClassName?: string
+}) {
   return (
     <a
       href={`#${sectionIds.hero}`}
@@ -19,7 +28,7 @@ export default function BrandLink({ tone = 'light' }: { tone?: 'light' | 'dark' 
         sizes="48px"
         className="size-11 rounded-xl lg:size-12"
       />
-      <span className="leading-tight">
+      <span className={`leading-tight ${nameClassName}`}>
         <span
           className={`block text-[1.0625rem] font-extrabold tracking-tight lg:text-lg ${
             tone === 'dark' ? 'text-surface' : 'text-brand-green-dark'
